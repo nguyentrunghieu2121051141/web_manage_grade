@@ -24,7 +24,7 @@ if (isset($_POST['username']) && isset($_POST['password'])) {
 
     if ($result->num_rows > 0) {
         $_SESSION['msv'] = $username;
-        header("Location: /web/home/home/home.php");
+        header("Location: /web/student/home_student.php");
         exit();
     } 
 
@@ -34,8 +34,7 @@ if (isset($_POST['username']) && isset($_POST['password'])) {
 
     if ($result->num_rows > 0) {
         $_SESSION['mgv'] = $username;
-        echo "Đăng nhập được rồi.";
-        // header("Location: /web/admin/home_admin/home_admin.html");
+        header("Location: /web/teacher/teacher_home.php");
         exit();
     } else {
         echo "Tên đăng nhập hoặc mật khẩu không đúng.";
