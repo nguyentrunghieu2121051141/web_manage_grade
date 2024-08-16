@@ -6,7 +6,7 @@ if (!isset($_SESSION['id_admin'])) {
 }
 
 $id_admin = $_SESSION['id_admin'];
-?> 
+?>
 
 <!DOCTYPE html>
 <html>
@@ -15,7 +15,7 @@ $id_admin = $_SESSION['id_admin'];
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/web/admin/home_admin/home_admin.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <title>Trang quản trị</title>
+    <title>Nhập ngành</title>
 </head>
 <style>
     .menu ul a .nganh{
@@ -47,15 +47,27 @@ $id_admin = $_SESSION['id_admin'];
                     <input type="text" id="ma_nganh" name="ma_nganh" placeholder="Nhập mã ngành">
                     <input type="text" id="ten_nganh" name="ten_nganh" placeholder="Nhập tên ngành">
                     <br>
-                    
+                    <select name="ma_khoa" id="ma_khoa">
+                    <option value="">-- Chọn khoa --</option>
+                    <?php
+                        include('config.php');
+                        $ma_khoa = mysqli_query($conn, "SELECT * FROM khoa");
+
+                        if (!$ma_khoa) {
+                            die("Lỗi khi truy vấn dữ liệu: " . mysqli_error($conn));
+                        }
+
+                        while ($row = mysqli_fetch_array($ma_khoa)) {
+                            echo '<option value="' . $row['ma_khoa'] . '">' . $row['ten_khoa'] . '</option>';
+                        }
+                    ?>
+                    </select>
                     <br>
                     <br>
                     <button type="submit">Nhập</button>
                 </form>
             </li>
-            
         </ul>
-    
     </div>
     <footer>
     <ul>
@@ -67,35 +79,33 @@ $id_admin = $_SESSION['id_admin'];
 
 <?php
 // session_start();
-$servername = "localhost";
-$username = "root";
-$password = "";
-$dbname = "btl_web";
-
-// Tạo kết nối
-$conn = new mysqli($servername, $username, $password, $dbname);
-
-// Kiểm tra kết nối
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
-}
+include('config.php');
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
     $ma_nganh = $_POST['ma_nganh'];
     $ten_nganh = $_POST['ten_nganh'];
+    $ma_khoa = $_POST['ma_khoa'];
 
-    $sql = "INSERT INTO nganh (ma_nganh, ten_nganh) 
-    VALUES ('$ma_nganh', '$ten_nganh')";
+    if (empty($_POST['ma_nganh']) && empty($_POST['ten_nganh'])) {
+        echo'Không được để trống';
+    } else{
 
+        $sql = "INSERT INTO nganh (ma_nganh, ten_nganh, ma_khoa) 
+        VALUES ('$ma_nganh', '$ten_nganh', '$ma_khoa')";
 
-    if ($conn->query($sql) === TRUE) {
-    } else {
-        echo "Error: " . $sql . "<br>" . $conn->error;
+        if(isset($_POST['ma_nganh'])){
+            echo "Đã tồn tại, vui lòng chọn giá trị khác!";
+        }
+        else{
+            if ($conn->query($sql) === TRUE) {
+                echo "Dữ liệu đã được thêm thành công!";
+            } else {
+                echo "Lỗi: " . $sql . "<br>" . $conn->error;
+            }
+        }
     }
-
 }
 
 $conn->close();
-
-?> 
+?>

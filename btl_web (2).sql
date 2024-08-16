@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Aug 16, 2024 at 06:49 AM
+-- Generation Time: Aug 16, 2024 at 06:08 PM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -165,7 +165,6 @@ CREATE TABLE `khoa` (
 --
 
 INSERT INTO `khoa` (`ma_khoa`, `ten_khoa`) VALUES
-('aaa', 'hehe'),
 ('CD', 'Cơ điện'),
 ('CNTT', 'Công nghệ thông tin'),
 ('CT', 'Lý luận chính trị'),
@@ -209,7 +208,11 @@ CREATE TABLE `nganh` (
 --
 
 INSERT INTO `nganh` (`ma_nganh`, `ma_khoa`, `ten_nganh`) VALUES
-('', NULL, '');
+('CTL', 'KHCB', 'Cơ lý thuyết'),
+('KT', 'KT_QTKD', 'Kế toán'),
+('KTM', 'MO', 'Kĩ thuật mỏ'),
+('KTMT', 'MT', 'Kỹ thuật môi trường'),
+('KTTK', 'MO', 'Kĩ thuật tuyển khoáng');
 
 -- --------------------------------------------------------
 

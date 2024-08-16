@@ -39,7 +39,7 @@ $id_admin = $_SESSION['id_admin'];
     </div>
     <footer>
     <ul>
-        <li>Bạn đang đăng nhập với tên  <?php echo $_SESSION['id_admin']?><a href="/web/admin/home_admin/logout.php">(Thoát)</a></li>
+        <li>Bạn đang đăng nhập với tên  <?php echo $_SESSION['id_admin']?><a href="logout.php">(Thoát)</a></li>
     </ul>
     </footer>
 </body>

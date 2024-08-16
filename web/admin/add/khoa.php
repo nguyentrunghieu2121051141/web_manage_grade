@@ -16,7 +16,7 @@ $id_admin = $_SESSION['id_admin'];
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/web/admin/home_admin/home_admin.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <title>Trang quản trị</title>
+    <title>Nhập khoa</title>
 </head>
 <style>
     .menu ul a .khoa{
@@ -65,31 +65,30 @@ $id_admin = $_SESSION['id_admin'];
 
 <?php
 
-$servername = "localhost";
-$username = "root";
-$password = "";
-$dbname = "btl_web";
+include('config.php');
 
-// Tạo kết nối
-$conn = new mysqli($servername, $username, $password, $dbname);
-
-// Kiểm tra kết nối
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
-}
 if ($_SERVER['REQUEST_METHOD'] == 'POST')
 {
     $ma_khoa = $_POST['ma_khoa'];
     $ten_khoa = $_POST['ten_khoa'];
 
-    $sql = "INSERT INTO khoa (ma_khoa, ten_khoa) 
-    VALUES ('$ma_khoa', '$ten_khoa')";
+    if (empty($_POST['ma_khoa']) && empty($_POST['ten_khoa'])) {
+        echo'Không được để trống';
+    } else{
 
+        $sql = "INSERT INTO khoa (ma_khoa, ten_khoa) 
+        VALUES ('$ma_khoa', '$ten_khoa')";
 
-    if ($conn->query($sql) === TRUE) {
-    echo "thanh cong";
-    } else {
-    echo "Error: " . $sql . "<br>" . $conn->error;
+        if(isset($_POST['ma_khoa'])){
+            echo "Đã tồn tại, vui lòng chọn giá trị khác!";
+        }
+        else{
+            if ($conn->query($sql) === TRUE) {
+            echo "thanh cong";
+            } else {
+            echo "Error: " . $sql . "<br>" . $conn->error;
+            }
+        }
     }
 }
 $conn->close();

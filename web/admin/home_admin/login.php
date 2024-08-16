@@ -29,7 +29,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
         if ($result->num_rows > 0) {
             $_SESSION['id_admin'] = $id_admin;
-            header("Location: /web/admin/home_admin/home_admin.php");
+            header("Location: home_admin.php");
             exit();
         } else {
             echo "Mã sinh viên hoặc mật khẩu không đúng.";
