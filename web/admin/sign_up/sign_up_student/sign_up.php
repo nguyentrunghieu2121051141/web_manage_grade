@@ -80,14 +80,16 @@ $conn->close();
                     <option value="">-- Chọn lớp --</option>
                     <?php
                         include('config.php');
-                        $ma_lop = mysqli_query($conn, "SELECT * FROM lop");
+                        $mgv = mysqli_query($conn, "SELECT * FROM lop");
 
-                        if (!$ma_lop) {
-                            die("Lỗi khi truy vấn dữ liệu: " . mysqli_error($conn));
-                        }
+                        $sql = "SELECT ma_lop FROM lop";
+                        $result = $conn->query($sql);
 
-                        while ($row = mysqli_fetch_array($ma_lop)) {
+                        if ($result->num_rows > 0) {
+                            // output data of each row
+                        while($row = $result->fetch_assoc()) {
                             echo '<option value="'  . $row['ma_lop']. '">' . $row['ma_lop'] . '</option>';
+                            }
                         }
                     ?>
                     </select>

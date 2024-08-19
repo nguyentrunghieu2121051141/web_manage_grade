@@ -5,7 +5,7 @@ if (!isset($_SESSION['mgv'])) {
     exit();
 }
 
-$msv = $_SESSION['mgv'];
+$mgv = $_SESSION['mgv'];
 ?> 
 
 <!DOCTYPE html>
@@ -20,17 +20,37 @@ $msv = $_SESSION['mgv'];
 <body>
     <div class="container">
         <header>
-            <h1>Tài khoản <?php echo $_SESSION['mgv']; ?></h1>
             <ul>
+            <li>Tài khoản <?php echo $_SESSION['mgv']; ?></li>
+                <li>
+                    <?php 
+                        include('config.php');
 
+                        $mgv = $_SESSION['mgv'];
+                        $sql = "SELECT mgv, ho_dem, ten FROM giang_vien WHERE mgv = '$mgv'";
+                        $result = $conn->query($sql);
+
+                        if ($result->num_rows > 0) {
+                            // output data of each row
+                            while($row = $result->fetch_assoc()) {
+                                echo "Họ và tên: ". $row["ho_dem"]. " " . $row["ten"] ;
+                            }
+                        } else {
+                            echo "Không tìm được tài khoản";
+                        }
+
+                        $conn->close();
+
+                    ?>
+                </li>
                 <li><a href="/web/home/login/logout.php">Đăng xuất</a></li>
             </ul>
         </header>
     </div>
     <footer>
-        <h2>Copyright © 2020 Trường Đại học Mỏ - Địa chất
+        <p>Copyright © 2020 Trường Đại học Mỏ - Địa chất
             Version: MOHN-2024.07B.33
-            Design by AQTECH.VN</h2>
+            Design by 2121051141@student.humg.edu.vn</p>
     </footer>
 </body>
 </html>

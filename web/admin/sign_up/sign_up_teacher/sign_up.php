@@ -79,14 +79,14 @@ $conn->close();
                 <option value="">-- Chọn khoa --</option>
                 <?php
                     include('config.php');
-                    $ma_khoa = mysqli_query($conn, "SELECT * FROM khoa");
+                    $sql = "SELECT ma_khoa, ten_khoa FROM khoa";
+                        $result = $conn->query($sql);
 
-                    if (!$ma_khoa) {
-                        die("Lỗi khi truy vấn dữ liệu: " . mysqli_error($conn));
-                    }
-
-                    while ($row = mysqli_fetch_array($ma_khoa)) {
+                        if ($result->num_rows > 0) {
+                            // output data of each row
+                        while($row = $result->fetch_assoc()) {
                         echo '<option value="' . $row['ma_khoa'] . '">' . $row['ten_khoa'] . '</option>';
+                        }
                     }
                 ?>
                 </select>

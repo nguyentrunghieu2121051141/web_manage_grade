@@ -26,9 +26,33 @@ $id_admin = $_SESSION['id_admin'];
 </style>
 <body>
     <div class="container">
-        <header>
-            <h1><a href="/web/admin/home_admin/home_admin.php"><i class="fa-solid fa-house"></i> Trang chủ</a></h1>
-            <h1>Tài khoản <?php echo $_SESSION['id_admin']?></h1>
+    <header>
+            <ul>
+                <li><a href="/web/admin/home_admin/home_admin.php"><i class="fa-solid fa-house"></i> Trang chủ</a></li>
+                <li>Tài khoản <?php echo $_SESSION['id_admin']?></li>
+                <li>
+                    <?php 
+                        include('config.php');
+                        
+                        $id_admin = $_SESSION['id_admin'];
+
+                        $sql = "SELECT id_admin, ho_dem, ten FROM admin WHERE id_admin = '$id_admin'";
+                        $result = $conn->query($sql);
+
+                        if ($result->num_rows > 0) {
+                            // output data of each row
+                            while($row = $result->fetch_assoc()) {
+                                echo "Họ và tên: ". $row["ho_dem"]. " " . $row["ten"] ;
+                            }
+                        } else {
+                            echo "Không tìm được tài khoản";
+                        }
+
+                        $conn->close();
+
+                    ?>
+                </li>
+            </ul>
         </header>
         <ul class="menu_add">
             <li class="menu">
@@ -54,9 +78,7 @@ $id_admin = $_SESSION['id_admin'];
     
     </div>
     <footer>
-    <ul>
-        <li>Bạn đang đăng nhập với tên  <?php echo $_SESSION['id_admin']?><a href="/web/admin/home_admin/logout.php">(Thoát)</a></li>
-    </ul>
+        <p>Bạn đang đăng nhập với tài khoản  <?php echo $_SESSION['id_admin']?><a href="logout.php">(Thoát)</a></p>
     </footer>
 </body>
 </html>
