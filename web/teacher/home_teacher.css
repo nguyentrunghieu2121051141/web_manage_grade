@@ -47,6 +47,62 @@ header li {
     color: #D7EDF9;
 }
 
+.menu {
+    height: 345px;
+    width: 260px;
+    margin-top: 30px;
+    margin-left: 30px;
+    padding: 0;
+  }
+  
+.menu ul {
+    width: 200px;
+    padding: 0;
+    margin: 0;
+    list-style: none;
+    font-family: Arial, Helvetica, sans-serif ;
+    background-color: #FFFFFF;
+    justify-content: space-between;
+  }
+  
+.menu li {
+    
+    margin: 0;
+    padding: 10px; 
+    list-style: none;
+  }
+.menu ul li{
+    padding: 12px 16px;
+    border:1px solid #DFDFDF;
+}
+
+.menu ul a li{
+    color: black;
+}
+
+.menu ul a{
+    text-decoration: none;
+}
+
+.menu ul li:hover{
+    background-color: #F2F2F2;
+}
+
+select{
+    margin-left: 50px;
+}
+
+table{
+    width: 700px;
+    background-color: white;
+    margin:auto;
+}
+
+table, th, td {
+    border-collapse: collapse;
+    border:1px solid black;
+  }
+
 footer {
     background-color: #2CA2E6;
     width: 100%;

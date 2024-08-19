@@ -46,12 +46,41 @@ $mgv = $_SESSION['mgv'];
                 <li><a href="/web/home/login/logout.php">Đăng xuất</a></li>
             </ul>
         </header>
-        <div class="menu">
-            <ul>
-                <a href="nhap_drl.php"><li>Nhập điểm rèn luyện</li></a>
-                <a href="/web/admin/add/nganh.php"><li>Nhập điểm</li></a>
-            </ul>
-        </div>
+        <br>
+
+        <br>
+        <table>
+            <tr>
+                <th><select name="ma_lop" id="ma_lop">
+                    <option value="">-- Chọn lớp --</option>
+                    <?php
+                        include('config.php');
+                        $mgv = mysqli_query($conn, "SELECT * FROM lop");
+
+                        $sql = "SELECT ma_lop FROM lop";
+                        $result = $conn->query($sql);
+
+                        if ($result->num_rows > 0) {
+                            // output data of each row
+                        while($row = $result->fetch_assoc()) {
+                            echo '<option value="'  . $row['ma_lop']. '">' . $row['ma_lop'] . '</option>';
+                            }
+                        }
+                    ?>
+                    </select>
+                </th>
+                <th>STT</th>
+                <th>Mã sinh viên</th>
+                <th>Sinh viên</th>
+                <th>Điểm</th>
+            </tr>
+            <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+        </table>
     </div>
     <footer>
         <p>Copyright © 2020 Trường Đại học Mỏ - Địa chất
