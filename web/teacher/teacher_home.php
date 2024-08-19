@@ -1,7 +1,7 @@
 <?php
 session_start();
 if (!isset($_SESSION['mgv'])) {
-    echo 'Biến phiên mgv không được thiết lập.';
+    header("Location: /web/home/login/login.php");
     exit();
 }
 

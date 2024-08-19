@@ -1,16 +1,5 @@
 <?php
-$servername = "localhost";
-$username = "root";
-$password = "";
-$dbname = "btl_web";
-
-// Tạo kết nối
-$conn = new mysqli($servername, $username, $password, $dbname);
-
-// Kiểm tra kết nối
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
-}
+include('config.php');
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     // Lấy dữ liệu từ form
@@ -22,16 +11,31 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $mat_khau = $_POST['mat_khau'];
     $ngay_sinh = $_POST['ngay_sinh'];
     $gioi_tinh = $_POST['gender'];
+    $ma_khoa = $_POST['ma_khoa'];
 
-    // Chèn dữ liệu vào bảng
-    $sql = "INSERT INTO giang_vien (mgv, ho_dem, ten, sdt, email, mat_khau, ngay_sinh, gioi_tinh) 
-    VALUES ('$mgv', '$ho_dem', '$ten', '$sdt', '$email', '$mat_khau', '$ngay_sinh', '$gioi_tinh')";
+    if (empty($_POST['mgv']) || empty($_POST['ho_dem']) || empty($_POST['ten']) || 
+    empty($_POST['sdt']) || empty($_POST['email']) || empty($_POST['mat_khau']) || 
+    empty($_POST['ngay_sinh']) || empty($_POST['gender']) || empty($_POST['ma_khoa'])) {
+    echo'Không được để trống';
 
+    } else{
+        $sql = "SELECT mgv FROM giang_vien WHERE mgv = '$mgv'";
+        $result = $conn->query($sql);
 
-    if ($conn->query($sql) === TRUE) {
-        echo "Thành công ";
-    } else {
-        echo "Error: " . $sql . "<br>" . $conn->error;
+            if ($result->num_rows > 0) {
+                echo "Đã tồn tại";
+            } else {
+
+                // Chèn dữ liệu vào bảng
+                $sql = "INSERT INTO giang_vien (mgv, ho_dem, ten, sdt, email, mat_khau, ngay_sinh, gioi_tinh, ma_khoa) 
+                VALUES ('$mgv', '$ho_dem', '$ten', '$sdt', '$email', '$mat_khau', '$ngay_sinh', '$gioi_tinh', '$ma_khoa')";
+
+                if ($conn->query($sql) === TRUE) {
+                    echo "Thành công ";
+                } else {
+                    echo "Error: " . $sql . "<br>" . $conn->error;
+                }
+            }
     }
 }
 
@@ -43,7 +47,7 @@ $conn->close();
     <head>
         <meta charset="UTF-8">
         <link rel="stylesheet" href="sign_up.css">
-        <title>sign_up</title>
+        <title>sign_up_teacher</title>
     </head>
         <body>
             
@@ -67,6 +71,25 @@ $conn->close();
                 <label for="female">Nữ</label><br>
                     
             </div>
+
+            <br>
+
+            <br>
+                <select name="ma_khoa" id="ma_khoa">
+                <option value="">-- Chọn khoa --</option>
+                <?php
+                    include('config.php');
+                    $ma_khoa = mysqli_query($conn, "SELECT * FROM khoa");
+
+                    if (!$ma_khoa) {
+                        die("Lỗi khi truy vấn dữ liệu: " . mysqli_error($conn));
+                    }
+
+                    while ($row = mysqli_fetch_array($ma_khoa)) {
+                        echo '<option value="' . $row['ma_khoa'] . '">' . $row['ten_khoa'] . '</option>';
+                    }
+                ?>
+                </select>
                     
                 <br>
                  

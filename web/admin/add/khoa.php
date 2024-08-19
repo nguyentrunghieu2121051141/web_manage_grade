@@ -1,7 +1,7 @@
 <?php
 session_start();
 if (!isset($_SESSION['id_admin'])) {
-    echo 'Biến phiên không được thiết lập.';
+    header("Location: /web/admin/home_admin/login.php");
     exit();
 }
 
@@ -33,20 +33,18 @@ $id_admin = $_SESSION['id_admin'];
         <ul class="menu_add">
             <li class="menu">
                 <ul>
-                    <a href="/web/admin/add/khoa.php"><li class="khoa" >Khoa</li></a>
-                    <a href="/web/admin/add/nganh.php"><li>Ngành</li></a>
-                    <li>Chuyên ngành</li>
-                    <li>Học phần</li>
-                    <li>Giảng viên</li>
-                    <li>Lớp</li>
-                    <li>Nhóm học phần</li>
-                    <li>Sinh viên</li>
+                <a href="/web/admin/add/khoa.php"><li class = "khoa">Khoa</li></a>
+                <a href="/web/admin/add/nganh.php"><li>Ngành</li></a>
+                <a href="/web/admin/add/chuyen_nganh.php"><li>Chuyên ngành</li></a>
+                <a href="/web/admin/add/hoc_phan.php"><li>Học phần</li></a>
+                <a href="/web/admin/add/lop.php"><li>Lớp</li></a>
+                <a href="/web/admin/add/nhom_hoc_phan.php"><li>Nhóm học phần</li></a>
                 </ul>
             </li>
             <li class="add">
                 <form action="khoa.php" method="post">
-                    <input type="text" id="ma_khoa" name="ma_khoa" placeholder="Nhập mã khoa">
-                    <input type="text" id="ten_khoa" name="ten_khoa" placeholder="Nhập tên khoa">
+                    <input type="text" id="ma_khoa" name="ma_khoa" placeholder="Mã khoa">
+                    <input type="text" id="ten_khoa" name="ten_khoa" placeholder="Tên khoa">
                     <br>
                     <button type="submit">Nhập</button>
                 </form>
@@ -72,25 +70,28 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
     $ma_khoa = $_POST['ma_khoa'];
     $ten_khoa = $_POST['ten_khoa'];
 
-    if (empty($_POST['ma_khoa']) && empty($_POST['ten_khoa'])) {
+    if (empty($_POST['ma_khoa']) || empty($_POST['ten_khoa'])) {
         echo'Không được để trống';
     } else{
+        $sql = "SELECT ma_khoa FROM khoa WHERE ma_khoa = '$ma_khoa'";
+        $result = $conn->query($sql);
 
-        $sql = "INSERT INTO khoa (ma_khoa, ten_khoa) 
-        VALUES ('$ma_khoa', '$ten_khoa')";
+        if ($result->num_rows > 0) {
+            echo "Đã tồn tại";
+        } else {
 
-        if(isset($_POST['ma_khoa'])){
-            echo "Đã tồn tại, vui lòng chọn giá trị khác!";
-        }
-        else{
+            $sql = "INSERT INTO khoa (ma_khoa, ten_khoa) 
+            VALUES ('$ma_khoa', '$ten_khoa')";
+
             if ($conn->query($sql) === TRUE) {
-            echo "thanh cong";
+            echo "Dữ liệu đã được thêm thành công!";
             } else {
             echo "Error: " . $sql . "<br>" . $conn->error;
             }
         }
     }
 }
+
 $conn->close();
 
 ?> 

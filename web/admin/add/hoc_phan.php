@@ -15,10 +15,10 @@ $id_admin = $_SESSION['id_admin'];
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/web/admin/home_admin/home_admin.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <title>Nhập ngành</title>
+    <title>Nhập học phần</title>
 </head>
 <style>
-    .menu ul a .nganh{
+    .menu ul a .hoc_phan{
     background-color: #0F6CBF;
     color: #FFFFFF;
  }
@@ -32,31 +32,32 @@ $id_admin = $_SESSION['id_admin'];
         <ul class="menu_add">
             <li class="menu">
                 <ul>
-                <a href="/web/admin/add/khoa.php"><li>Khoa</li></a>
-                <a href="/web/admin/add/nganh.php"><li class = "nganh">Ngành</li></a>
-                <a href="/web/admin/add/chuyen_nganh.php"><li>Chuyên ngành</li></a>
-                <a href="/web/admin/add/hoc_phan.php"><li>Học phần</li></a>
-                <a href="/web/admin/add/lop.php"><li>Lớp</li></a>
-                <a href="/web/admin/add/nhom_hoc_phan.php"><li>Nhóm học phần</li></a>
+                    <a href="/web/admin/add/khoa.php"><li>Khoa</li></a>
+                    <a href="/web/admin/add/nganh.php"><li  >Ngành</li></a>
+                    <a href="/web/admin/add/chuyen_nganh.php"><li>Chuyên ngành</li></a>
+                    <a href="/web/admin/add/hoc_phan.php"><li class="hoc_phan">Học phần</li></a>
+                    <a href="/web/admin/add/lop.php"><li>Lớp</li></a>
+                    <a href="/web/admin/add/nhom_hoc_phan.php"><li>Nhóm học phần</li></a>
                 </ul>
             </li>
             <li class="add">
-                <form action="nganh.php" method="post">
-                    <input type="text" id="ma_nganh" name="ma_nganh" placeholder="Mã ngành">
-                    <input type="text" id="ten_nganh" name="ten_nganh" placeholder="Tên ngành">
+                <form action="hoc_phan.php" method="post">
+                    <input type="text" id="ma_hoc_phan" name="ma_hoc_phan" placeholder="Mã học phần">
+                    <input type="text" id="ten_hoc_phan" name="ten_hoc_phan" placeholder="Tên học phần">
+                    <input type="number" id="so_tin_chi" name="so_tin_chi" placeholder="Số tín chỉ" min = "1">
                     <br>
-                    <select name="ma_khoa" id="ma_khoa">
-                    <option value="">-- Chọn khoa --</option>
-                    <?php
+                    <select name="ma_nganh" id="ma_nganh">
+                    <option value="">-- Chọn ngành --</option>
+                    <<?php
                         include('config.php');
-                        $ma_khoa = mysqli_query($conn, "SELECT * FROM khoa");
+                        $ma_nganh = mysqli_query($conn, "SELECT * FROM nganh");
 
-                        if (!$ma_khoa) {
-                            die("Lỗi khi truy vấn dữ liệu: " . mysqli_error($conn));
+                        if (!$ma_nganh) {
+                            die("Không tìm thấy dữ liệu: " . mysqli_error($conn));
                         }
 
-                        while ($row = mysqli_fetch_array($ma_khoa)) {
-                            echo '<option value="' . $row['ma_khoa'] . '">' . $row['ten_khoa'] . '</option>';
+                        while ($row = mysqli_fetch_array($ma_nganh)) {
+                            echo '<option value="' . $row['ma_nganh'] . '">' . $row['ten_nganh'] . '</option>';
                         }
                     ?>
                     </select>
@@ -81,21 +82,22 @@ include('config.php');
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
+    $ma_hoc_phan = $_POST['ma_hoc_phan'];
+    $ten_hoc_phan = $_POST['ten_hoc_phan'];
+    $so_tin_chi = $_POST['so_tin_chi'];
     $ma_nganh = $_POST['ma_nganh'];
-    $ten_nganh = $_POST['ten_nganh'];
-    $ma_khoa = $_POST['ma_khoa'];
 
-    if (empty($_POST['ma_nganh']) || empty($_POST['ten_nganh']) || empty($_POST['ma_khoa'])) {
+    if (empty($_POST['ma_hoc_phan']) || empty($_POST['ten_hoc_phan']) || empty($_POST['so_tin_chi']) || empty($_POST['ma_nganh'])) {
         echo'Không được để trống';
     } else{
-        $sql = "SELECT ma_nganh FROM nganh WHERE ma_nganh = '$ma_nganh'";
+        $sql = "SELECT ma_hoc_phan FROM hoc_phan WHERE ma_hoc_phan = '$ma_hoc_phan'";
         $result = $conn->query($sql);
 
         if ($result->num_rows > 0) {
             echo "Đã tồn tại";
         } else {
-            $sql = "INSERT INTO nganh (ma_nganh, ten_nganh, ma_khoa) 
-            VALUES ('$ma_nganh', '$ten_nganh', '$ma_khoa')";
+            $sql = "INSERT INTO hoc_phan (ma_hoc_phan, ten_hoc_phan, so_tin_chi, ma_nganh) 
+            VALUES ('$ma_hoc_phan', '$ten_hoc_phan', '$so_tin_chi', '$ma_nganh')";
 
             if ($conn->query($sql) === TRUE) {
                 echo "Dữ liệu đã được thêm thành công!";

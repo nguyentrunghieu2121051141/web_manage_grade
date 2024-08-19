@@ -1,7 +1,7 @@
 <?php
 session_start();
 if (!isset($_SESSION['id_admin'])) {
-    echo 'Biến phiên không được thiết lập.';
+    header("Location: /web/admin/home_admin/login.php");
     exit();
 }
 
@@ -28,12 +28,10 @@ $id_admin = $_SESSION['id_admin'];
         <ul>
             <a href="/web/admin/add/khoa.php"><li>Khoa</li></a>
             <a href="/web/admin/add/nganh.php"><li>Ngành</li></a>
-            <li>Chuyên ngành</li>
-            <li>Học phần</li>
-            <li>Giảng viên</li>
-            <li>Lớp</li>
-            <li>Nhóm học phần</li>
-            <li>Sinh viên</li>
+            <a href="/web/admin/add/chuyen_nganh.php"><li>Chuyên ngành</li></a>
+            <a href="/web/admin/add/hoc_phan.php"><li>Học phần</li></a>
+            <a href="/web/admin/add/lop.php"><li>Lớp</li></a>
+            <a href="/web/admin/add/nhom_hoc_phan.php"><li>Nhóm học phần</li></a>
         </ul>
         </div>
     </div>

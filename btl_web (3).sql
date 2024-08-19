@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Aug 16, 2024 at 06:08 PM
+-- Generation Time: Aug 19, 2024 at 07:02 AM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -43,9 +43,7 @@ CREATE TABLE `admin` (
 --
 
 INSERT INTO `admin` (`id_admin`, `mat_khau`, `ho_dem`, `ten`, `email`, `sdt`, `ngay_sinh`, `gioi_tinh`) VALUES
-(2121, 'hieu', 'Nguyễn', 'Trung', 'giomua@gmail.com', '0987654321', '2024-08-13', 'Nam'),
-(123456789, 'hieu', 'Tan', 'Hoang', 'adminhoang@gmail.com', '0987654358', '2024-08-07', 'Nam'),
-(2147483647, 'hieu', 'Tan', 'Toi', 'admin@gmail.com', '0987654321', '2024-08-07', 'Nam');
+(2121, 'hieu', 'Nguyễn', 'Trung', 'giomua@gmail.com', '0987654321', '2024-08-13', 'Nam');
 
 -- --------------------------------------------------------
 
@@ -56,8 +54,20 @@ INSERT INTO `admin` (`id_admin`, `mat_khau`, `ho_dem`, `ten`, `email`, `sdt`, `n
 CREATE TABLE `chuyen_nganh` (
   `ma_chuyen_nganh` varchar(10) NOT NULL,
   `ma_nganh` varchar(10) DEFAULT NULL,
-  `ten_chuyen_khoa` varchar(50) NOT NULL
+  `ten_chuyen_nganh` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `chuyen_nganh`
+--
+
+INSERT INTO `chuyen_nganh` (`ma_chuyen_nganh`, `ma_nganh`, `ten_chuyen_nganh`) VALUES
+('CNPM', 'CNTT', 'Công nghệ phần mềm'),
+('CNTTDH', 'CNTT', 'Công nghệ Thông tin Địa học'),
+('HTTT', 'CNTT', 'Hệ thống thông tin'),
+('KHMT', 'CNTT', 'Khoa học máy tính'),
+('MMT', 'CNTT', 'Mạng máy tính'),
+('THKT', 'CNTT', 'Tin học kinh tế');
 
 -- --------------------------------------------------------
 
@@ -66,10 +76,18 @@ CREATE TABLE `chuyen_nganh` (
 --
 
 CREATE TABLE `danh_sach_lop` (
-  `ma_lop` varchar(10) NOT NULL,
+  `ma_lop` varchar(15) NOT NULL,
   `msv` int(11) NOT NULL,
-  `so_luong` int(11) DEFAULT NULL
+  `ho_dem` varchar(50) NOT NULL,
+  `ten` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `danh_sach_lop`
+--
+
+INSERT INTO `danh_sach_lop` (`ma_lop`, `msv`, `ho_dem`, `ten`) VALUES
+('DCCTCT66_06D', 3131, 'Đoàn Minh', 'Dũng');
 
 -- --------------------------------------------------------
 
@@ -134,7 +152,15 @@ CREATE TABLE `giang_vien` (
 --
 
 INSERT INTO `giang_vien` (`mgv`, `ma_khoa`, `ho_dem`, `ten`, `sdt`, `email`, `mat_khau`, `ngay_sinh`, `gioi_tinh`) VALUES
-(121212, NULL, 'Hoang', 'Xuan Vinh', 987654321, 'vinh@gmail.com', '2003', '2024-08-07', 'Nam');
+(1010, 'CNTT', 'Hoàng Mạnh', 'Cầm', 2147483647, 'manhcam@gmail.com', 'manhcam', '2023-11-16', 'Nam'),
+(2121, 'CNTT', 'Đoàn Minh', 'Quân', 2147483647, 'quanminhdoan@gmail.com', 'quan', '2024-08-13', 'Nam'),
+(3131, 'CT', 'Vũ Hồng', 'Quyên', 2147483647, 'quyen@gmail.com', 'quyen', '2024-08-02', 'Nữ'),
+(4141, 'CNTT', 'Nguyễn Thu', 'Thùy', 2147483647, 'thuthuy@gmail.com', 'thuthuy', '2024-08-01', 'Nữ'),
+(5151, 'CNTT', 'Nguyễn Thùy', 'Trang', 2147483647, 'thuytrang@gmail.com', 'thuytrang', '2024-08-07', 'Nữ'),
+(6161, 'CNTT', 'Nông Thùy', 'Anh', 2147483647, 'thuyanh@gmail.com', 'thuyanh', '2024-08-22', 'Nữ'),
+(7171, 'CNTT', 'Trần Minh', 'Phương', 2147483647, 'minhphuong@gmail.com', 'minhphuong', '2024-08-28', 'Nam'),
+(8181, 'CNTT', 'Cao Anh', 'Tuấn', 2147483647, 'anhtuan@gmail.com', 'anhtuan', '2024-07-10', 'Nam'),
+(9191, 'CNTT', 'Triệu Tử', 'Long', 6879503, 'trieulong@gmail.com', 'trieulong', '2024-04-18', 'Nam');
 
 -- --------------------------------------------------------
 
@@ -144,10 +170,37 @@ INSERT INTO `giang_vien` (`mgv`, `ma_khoa`, `ho_dem`, `ten`, `sdt`, `email`, `ma
 
 CREATE TABLE `hoc_phan` (
   `ma_hoc_phan` int(7) NOT NULL,
-  `ma_chuyen_nganh` varchar(10) DEFAULT NULL,
   `ten_hoc_phan` varchar(50) NOT NULL,
-  `so_tin_chi` int(10) DEFAULT NULL
+  `so_tin_chi` int(10) DEFAULT NULL,
+  `ma_nganh` varchar(10) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `hoc_phan`
+--
+
+INSERT INTO `hoc_phan` (`ma_hoc_phan`, `ten_hoc_phan`, `so_tin_chi`, `ma_nganh`) VALUES
+(7080104, 'Pháp luật đại cương', 3, 'CNTT'),
+(7080107, 'Kiểm thử và đảm bảo chất lượng', 3, 'CNTT'),
+(7080111, 'Mã nguồn mở', 2, 'CNTT'),
+(7080113, 'Phân tích & thiết kế hệ thống và BTL', 3, 'CNTT'),
+(7080116, 'Phát triển ứng dụng Web + BTL', 4, 'CNTT'),
+(7080122, 'Trí tuệ nhân tạo + BTL', 3, 'CNTT'),
+(7080208, 'Cơ sở lập trình', 3, 'CNTT'),
+(7080216, 'Kĩ thuật lập trình hướng đối tượng C++', 2, 'CNTT'),
+(7080504, 'Điện toán đám mây và ứng dụng', 2, 'CNTT'),
+(7080505, 'Điện toán di động', 3, 'CNTT'),
+(7080507, 'Dữ liệu lớn và ứng dụng', 3, 'CNTT'),
+(7080508, 'Khai phá dữ liệu', 3, 'CNTT'),
+(7080509, 'Khoa học dữ liệu', 2, 'CNTT'),
+(7080515, 'Phân tích và thiết kế hướng đối tượng', 3, 'CNTT'),
+(7080516, 'Phân tích và thiết kế thuật toán', 3, 'CNTT'),
+(7080520, 'Web ngữ nghĩa', 3, 'CNTT'),
+(7080626, 'Thương mại điện tử', 3, 'CNTT'),
+(7080635, 'Quản trị dự án CNTT', 3, 'CNTT'),
+(7080703, 'Cơ sở an ninh mạng', 3, 'CNTT'),
+(7080713, 'Kiến trúc và hạ tầng mạng IoT', 2, 'CNTT'),
+(7080717, 'Mạng máy tính', 3, 'CNTT');
 
 -- --------------------------------------------------------
 
@@ -186,10 +239,41 @@ INSERT INTO `khoa` (`ma_khoa`, `ten_khoa`) VALUES
 --
 
 CREATE TABLE `lop` (
-  `ma_lop` varchar(10) NOT NULL,
+  `ma_lop` varchar(15) NOT NULL,
   `mgv` int(11) DEFAULT NULL,
-  `ma_chuyen_nganh` varchar(10) DEFAULT NULL
+  `ma_chuyen_nganh` varchar(10) DEFAULT NULL,
+  `so_luong` int(10) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `lop`
+--
+
+INSERT INTO `lop` (`ma_lop`, `mgv`, `ma_chuyen_nganh`, `so_luong`) VALUES
+('DCCTCT66_04A', 2121, 'THKT', 60),
+('DCCTCT66_04B', 3131, 'THKT', 60),
+('DCCTCT66_04C', 4141, 'THKT', 60),
+('DCCTCT66_04D', 1010, 'THKT', 60),
+('DCCTCT66_05A', 7171, 'MMT', 60),
+('DCCTCT66_05B', 6161, 'MMT', 60),
+('DCCTCT66_05C', 8181, 'MMT', 60),
+('DCCTCT66_05D', 4141, 'MMT', 60),
+('DCCTCT66_06A', 8181, 'CNPM', 60),
+('DCCTCT66_06B', 2121, 'CNPM', 60),
+('DCCTCT66_06C', 5151, 'CNPM', 60),
+('DCCTCT66_06D', 2121, 'CNPM', 60),
+('DCCTCT66_07A', 5151, 'KHMT', 60),
+('DCCTCT66_07B', 2121, 'KHMT', 60),
+('DCCTCT66_07C', 7171, 'KHMT', 60),
+('DCCTCT66_07D', 8181, 'KHMT', 60),
+('DCCTCT66_08A', 1010, 'CNTTDH', 60),
+('DCCTCT66_08B', 3131, 'CNTTDH', 60),
+('DCCTCT66_08C', 5151, 'CNTTDH', 60),
+('DCCTCT66_08D', 9191, 'CNTTDH', 60),
+('DCCTCT66_09A', 1010, 'HTTT', 60),
+('DCCTCT66_09B', 8181, 'HTTT', 60),
+('DCCTCT66_09C', 4141, 'HTTT', 60),
+('DCCTCT66_09D', 7171, 'HTTT', 60);
 
 -- --------------------------------------------------------
 
@@ -208,6 +292,7 @@ CREATE TABLE `nganh` (
 --
 
 INSERT INTO `nganh` (`ma_nganh`, `ma_khoa`, `ten_nganh`) VALUES
+('CNTT', 'CNTT', 'Công nghệ thông tin'),
 ('CTL', 'KHCB', 'Cơ lý thuyết'),
 ('KT', 'KT_QTKD', 'Kế toán'),
 ('KTM', 'MO', 'Kĩ thuật mỏ'),
@@ -223,21 +308,17 @@ INSERT INTO `nganh` (`ma_nganh`, `ma_khoa`, `ten_nganh`) VALUES
 CREATE TABLE `nhom_hoc_phan` (
   `ma_nhom` int(11) NOT NULL,
   `mgv` int(11) DEFAULT NULL,
-  `ma_phong` varchar(10) NOT NULL,
-  `ma_lop` varchar(10) DEFAULT NULL,
+  `ma_lop` varchar(15) DEFAULT NULL,
   `ma_hoc_phan` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
--- --------------------------------------------------------
-
 --
--- Table structure for table `phong`
+-- Dumping data for table `nhom_hoc_phan`
 --
 
-CREATE TABLE `phong` (
-  `ma_phong` varchar(10) NOT NULL,
-  `suc_chua` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+INSERT INTO `nhom_hoc_phan` (`ma_nhom`, `mgv`, `ma_lop`, `ma_hoc_phan`) VALUES
+(4, 3131, 'DCCTCT66_07B', 7080508),
+(6, 3131, 'DCCTCT66_07B', 7080515);
 
 -- --------------------------------------------------------
 
@@ -247,7 +328,7 @@ CREATE TABLE `phong` (
 
 CREATE TABLE `sinh_vien` (
   `msv` int(10) NOT NULL,
-  `ma_lop` varchar(10) DEFAULT NULL,
+  `ma_lop` varchar(15) DEFAULT NULL,
   `ho_dem` varchar(50) NOT NULL,
   `ten` varchar(50) NOT NULL,
   `sdt` int(10) NOT NULL,
@@ -262,8 +343,7 @@ CREATE TABLE `sinh_vien` (
 --
 
 INSERT INTO `sinh_vien` (`msv`, `ma_lop`, `ho_dem`, `ten`, `sdt`, `email`, `mat_khau`, `ngay_sinh`, `gioi_tinh`) VALUES
-(2121051169, NULL, 'Doan', 'Bien', 2147483647, 'giomua@gmail.com', 'asdfg', '2024-08-14', 'Nam'),
-(2121345673, NULL, 'Cao Hoàng', 'Long', 987654321, 'hoanglong@gmail.com', 'long', '2024-08-14', 'Nam');
+(3131, 'DCCTCT66_06D', 'Đoàn Minh', 'Dũng', 2147483647, 'minhdung@gmail.com', 'minhdung', '2024-08-14', 'Nam');
 
 --
 -- Indexes for dumped tables
@@ -321,7 +401,7 @@ ALTER TABLE `giang_vien`
 --
 ALTER TABLE `hoc_phan`
   ADD PRIMARY KEY (`ma_hoc_phan`),
-  ADD KEY `ma_chuyen_nganh` (`ma_chuyen_nganh`);
+  ADD KEY `fk_hoc_phan_nganh` (`ma_nganh`);
 
 --
 -- Indexes for table `khoa`
@@ -350,15 +430,8 @@ ALTER TABLE `nganh`
 ALTER TABLE `nhom_hoc_phan`
   ADD PRIMARY KEY (`ma_nhom`),
   ADD KEY `mgv` (`mgv`),
-  ADD KEY `ma_phong` (`ma_phong`),
   ADD KEY `ma_lop` (`ma_lop`),
   ADD KEY `ma_hoc_phan` (`ma_hoc_phan`);
-
---
--- Indexes for table `phong`
---
-ALTER TABLE `phong`
-  ADD PRIMARY KEY (`ma_phong`);
 
 --
 -- Indexes for table `sinh_vien`
@@ -424,7 +497,7 @@ ALTER TABLE `giang_vien`
 -- Constraints for table `hoc_phan`
 --
 ALTER TABLE `hoc_phan`
-  ADD CONSTRAINT `hoc_phan_ibfk_1` FOREIGN KEY (`ma_chuyen_nganh`) REFERENCES `chuyen_nganh` (`ma_chuyen_nganh`) ON DELETE CASCADE;
+  ADD CONSTRAINT `fk_hoc_phan_nganh` FOREIGN KEY (`ma_nganh`) REFERENCES `nganh` (`ma_nganh`) ON DELETE CASCADE;
 
 --
 -- Constraints for table `lop`
@@ -444,7 +517,6 @@ ALTER TABLE `nganh`
 --
 ALTER TABLE `nhom_hoc_phan`
   ADD CONSTRAINT `nhom_hoc_phan_ibfk_1` FOREIGN KEY (`mgv`) REFERENCES `giang_vien` (`mgv`) ON DELETE CASCADE,
-  ADD CONSTRAINT `nhom_hoc_phan_ibfk_2` FOREIGN KEY (`ma_phong`) REFERENCES `phong` (`ma_phong`) ON DELETE CASCADE,
   ADD CONSTRAINT `nhom_hoc_phan_ibfk_3` FOREIGN KEY (`ma_lop`) REFERENCES `lop` (`ma_lop`) ON DELETE CASCADE,
   ADD CONSTRAINT `nhom_hoc_phan_ibfk_4` FOREIGN KEY (`ma_hoc_phan`) REFERENCES `hoc_phan` (`ma_hoc_phan`) ON DELETE CASCADE;
 

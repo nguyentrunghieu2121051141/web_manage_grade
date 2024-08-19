@@ -1,7 +1,7 @@
 <?php
 session_start();
 if (!isset($_SESSION['msv'])) {
-    echo 'Biến phiên msv không được thiết lập.';
+    header("Location: /web/home/login/login.php");
     exit();
 }
 
