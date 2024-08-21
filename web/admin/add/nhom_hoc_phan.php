@@ -19,9 +19,9 @@ $id_admin = $_SESSION['id_admin'];
 </head>
 <style>
     .menu ul a .nhom_hoc_phan{
-    background-color: #0F6CBF;
-    color: #FFFFFF;
- }
+        background-color: #0F6CBF;
+        color: #FFFFFF;
+    }
 </style>
 <body>
     <div class="container">

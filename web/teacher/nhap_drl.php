@@ -40,7 +40,6 @@ $mgv = $_SESSION['mgv'];
                         }
 
                         $conn->close();
-
                     ?>
                 </li>
                 <li><a href="/web/home/login/logout.php">Đăng xuất</a></li>
@@ -49,38 +48,78 @@ $mgv = $_SESSION['mgv'];
         <br>
 
         <br>
-        <table>
-            <tr>
-                <th><select name="ma_lop" id="ma_lop">
-                    <option value="">-- Chọn lớp --</option>
-                    <?php
+        <form method="post" action="">
+            <table>
+                <tr>
+                    <th><select name="ma_lop" id="ma_lop">
+                        <option value="ma_lop">-- Chọn lớp --</option>
+                            <?php
+                                include('config.php');
+                    
+                                $mgv = $_SESSION['mgv'];
+
+                                $sql = "SELECT ma_lop FROM lop where mgv = '$mgv'";
+                                $result = $conn->query($sql);
+
+                                if ($result->num_rows > 0) {
+                                    // output data of each row
+                                while($row = $result->fetch_assoc()) {
+                                    echo '<option value="'  . $row['ma_lop']. '">' . $row['ma_lop'] . '</option>';
+                           
+                                    }
+                                }
+                            ?>
+                        </select>
+                    </th>
+                    <th><button type="submit">Mở danh sách</button></th>
+                </tr>
+                <tr>
+                    <th>STT</th>
+                    <th>Mã sinh viên</th>
+                    <th>Sinh viên</th>
+                    <th style = "width: 75px;">Điểm</th>
+                </tr>
+                <tr>
+
+                    <?php 
+                        
+                        if ($_SERVER["REQUEST_METHOD"] == "POST" && !empty($_POST['ma_lop'])) {
                         include('config.php');
-                        $mgv = mysqli_query($conn, "SELECT * FROM lop");
+                        $ma_lop = $_POST['ma_lop'];
 
-                        $sql = "SELECT ma_lop FROM lop";
-                        $result = $conn->query($sql);
+                        $sql1 = "SELECT ma_lop, msv, ho_dem, ten FROM danh_sach_lop WHERE ma_lop = '$ma_lop'";
+                        $result1 = $conn->query($sql1);
 
-                        if ($result->num_rows > 0) {
-                            // output data of each row
-                        while($row = $result->fetch_assoc()) {
-                            echo '<option value="'  . $row['ma_lop']. '">' . $row['ma_lop'] . '</option>';
+                        if ($result1->num_rows > 0) {
+                            $_SESSION['ma_lop'] = $ma_lop;
+                            $stt = 1;
+                            while($row = $result1->fetch_assoc()) {
+                                echo '<tr>';
+                                echo '<td>' . $stt++ . '</td>';
+                                echo '<td>' . $row["msv"] . '</td>';
+                                echo '<td>' . $row["ho_dem"] . ' ' . $row["ten"] . '</td>';
+                                echo '<td><input id = "drl" name = "drl" type = "number" min = "0" max = "100" style = "outline: none; width: 70px;"></td>';
+                                echo '</tr>';
                             }
+                            
+                        } else {
+                            echo "Lớp chưa có sinh viên";
                         }
+                        $msv = $_POST['msv'];
+                        $drl = $_POST['drl'];
+                        $sql2 = "INSERT INTO diem_ren_luyen (msv, drl) VALUES ('$msv', '$drl')";
+                        if ($conn->query($sql1) === TRUE and $conn->query($sql2) === TRUE) {
+                            echo "Thành công ";
+                        } else {
+                            echo "Error: " . $sql1 . $sql2 . "<br>" . $conn->error;
+                        }
+                    }
+                        $conn->close();
                     ?>
-                    </select>
-                </th>
-                <th>STT</th>
-                <th>Mã sinh viên</th>
-                <th>Sinh viên</th>
-                <th>Điểm</th>
-            </tr>
-            <tr>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-            </tr>
-        </table>
+                </tr>
+            </table>
+            <button class="button" type="submit"><b>Nhập điểm</b></button>
+        </form>
     </div>
     <footer>
         <p>Copyright © 2020 Trường Đại học Mỏ - Địa chất

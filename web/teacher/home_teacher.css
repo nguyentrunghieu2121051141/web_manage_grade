@@ -101,7 +101,23 @@ table{
 table, th, td {
     border-collapse: collapse;
     border:1px solid black;
-  }
+}
+
+.button {
+    display: block;
+    margin: 0 auto;
+    width: 300px;
+    color: #FFFFFF;
+    height: 40px;
+    margin-top: 20px;
+    border-radius: 5px;
+    border: 1px solid grey;
+    background-color: #4CB0EA;    
+}
+
+.button:hover{
+    font-size: 15px;
+}
 
 footer {
     background-color: #2CA2E6;

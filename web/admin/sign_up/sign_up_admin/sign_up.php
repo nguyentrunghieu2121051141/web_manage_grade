@@ -60,13 +60,13 @@ $conn->close();
                     <input type="date" id="ngay_sinh" name="ngay_sinh" placeholder="Ngày sinh">
                     <input type="text" id="id_admin" name="id_admin" placeholder="Mã đăng nhập">
     
-            <div class="gender">
-                <input type="radio" id="male" name="gender" value="Nam">
-                <label for="male">Nam</label>
-                <input type="radio" id="female" name="gender" value="Nữ">
-                <label for="female">Nữ</label><br>
-                    
-            </div>
+                <div class="gender">
+                    <input type="radio" id="male" name="gender" value="Nam">
+                    <label for="male">Nam</label>
+                    <input type="radio" id="female" name="gender" value="Nữ">
+                    <label for="female">Nữ</label><br>
+                        
+                </div>
                     
                 <br>
                  
