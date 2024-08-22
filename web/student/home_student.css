@@ -47,6 +47,50 @@ header li {
     color: #D7EDF9;
 }
 
+.login{
+    position: fixed;
+    font-family: Arial, Helvetica, sans-serif ;
+    height: 240px;
+    width: 270px;
+    right: 0;
+    top: 80px;
+    border: 2px solid #CED4DA;
+    background-color: #FFFFFF;
+}
+
+.login h2{
+    margin-left: 25px;
+    color: #219DE5;
+}
+.login li{
+    list-style: none;
+    left: 0px;
+    border-bottom:1px solid #DFDFDF;
+    padding: 12px 5px;
+    color: #2FA4E7;
+}
+
+.login button{
+    margin-top: 5px;
+    border: 2px solid #CED4DA;
+    border-radius: 5px;
+    background-color: #E45901;
+    margin-left: 12px;
+    width: 245px;
+    height: 36px;
+    cursor: pointer;
+}
+
+.login button a{
+    text-decoration: none;
+    color: #FFFFFF;
+}
+
+.login button:hover{
+    font-size: 15px;
+}
+
+
 footer {
     background-color: #2CA2E6;
     width: 100%;

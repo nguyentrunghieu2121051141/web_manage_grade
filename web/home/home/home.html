@@ -13,11 +13,21 @@
         <header>
             <ul>
                 <li><a href="home.html"><i class="fa-solid fa-house"></i> Trang chủ</a></li>
-                <li><a href="/web/home/login/login.php">Đăng nhập</a></li>
             </ul>
         </header>
 
     </div>
+
+    <form action="/web/home/login/login.php" method="post">
+        <div class="login">
+            <h2><i class="fa-solid fa-user"></i> Đăng nhập</h2>
+            <hr>
+            <input type="text" id="username" name="username" placeholder="Tên đăng nhập">
+            <input type="password" id="password" name="password" placeholder="Mật khẩu">
+            <button type="submit"><i class="fa-solid fa-arrow-right-to-bracket"></i><b> Đăng nhập</b></button>
+        </div>
+    </form>
+
     <footer>
         <p>Copyright © 2020 Trường Đại học Mỏ - Địa chất
             Version: MOHN-2024.07B.33

@@ -1,16 +1,5 @@
 <?php
-$servername = "localhost";
-$username = "root";
-$password = "";
-$dbname = "btl_web";
-
-// Tạo kết nối
-$conn = new mysqli($servername, $username, $password, $dbname);
-
-// Kiểm tra kết nối
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
-}
+include('../../home_admin/config.php');
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST'){
     // Lấy dữ liệu từ form
@@ -42,7 +31,7 @@ $conn->close();
 <html>
     <head>
         <meta charset="UTF-8">
-        <link rel="stylesheet" href="sign_up.css">
+        <link rel="stylesheet" href="/web/admin/sign_up/sign_up.css">
         <title>sign_up</title>
     </head>
         <body>

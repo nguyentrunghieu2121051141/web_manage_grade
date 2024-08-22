@@ -46,6 +46,51 @@ header li {
     margin-right: 20px;
 }
 
+.login{
+    position: fixed;
+    font-family: Arial, Helvetica, sans-serif ;
+    height: 240px;
+    width: 270px;
+    right: 0;
+    top: 80px;
+    border: 2px solid #CED4DA;
+    background-color: #FFFFFF;
+}
+
+.login h2{
+    margin-left: 25px;
+    color: #219DE5;
+}
+.login input{
+    width: 245px;
+    height: 37px;
+    border-radius: 5px;
+    margin-top: 5px;
+    margin-left: 9px;
+    outline: none;
+    border: 2px solid #CED4DA;
+}
+
+.login input:focus{
+    border: 4px solid #CAE8F8;
+}
+
+.login button{
+    margin-top: 5px;
+    border: 2px solid #CED4DA;
+    border-radius: 5px;
+    background-color: #2CA2E6;
+    color: #FFFFFF;
+    margin-left: 12px;
+    width: 245px;
+    height: 36px;
+    cursor: pointer;
+}
+
+.login button:hover{
+    font-size: 15px;
+}
+
 footer {
     background-color: #2CA2E6;
     width: 100%;

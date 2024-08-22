@@ -1,5 +1,5 @@
 <?php
-include('config.php');
+include('../../home_admin/config.php');
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
     // Lấy dữ liệu từ form
@@ -50,7 +50,7 @@ $conn->close();
 <html>
     <head>
         <meta charset="UTF-8">
-        <link rel="stylesheet" href="sign_up.css">
+        <link rel="stylesheet" href="/web/admin/sign_up/sign_up.css">
         <title>sign_up_student</title>
     </head>
         <body>

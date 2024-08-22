@@ -3,18 +3,8 @@
 <?php
 session_start(); // Bắt đầu session
 
-$servername = "localhost";
-$username = "root";
-$password = "";
-$dbname = "btl_web";
+include('config.php');
 
-// Tạo kết nối
-$conn = new mysqli($servername, $username, $password, $dbname);
-
-// Kiểm tra kết nối
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
-}
 
 // Kiểm tra xem form có được gửi đi hay không
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {

@@ -1,18 +1,8 @@
 <?php
 session_start();
 
-$servername = "localhost";
-$username = "root";
-$password = "";
-$dbname = "btl_web";
+include('../home/config.php');
 
-// Tạo kết nối
-$conn = new mysqli($servername, $username, $password, $dbname);
-
-// Kiểm tra kết nối
-if ($conn->connect_error) {
-    die("Kết nối thất bại: " . $conn->connect_error);
-}
 if ($_SERVER['REQUEST_METHOD'] == 'POST'){
 
     if (isset($_POST['username']) && isset($_POST['password'])) {
@@ -48,12 +38,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
 $conn->close();
 ?>
 
-<!DOCTYPE html>
+<!-- <!DOCTYPE html>
 <html>
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="login.css">
+    <link rel="stylesheet" href="home.css">
     <title>Đăng nhập</title>
    
 </head>
@@ -62,13 +52,14 @@ $conn->close();
 <body>
     <form action="login.php" method="post">
         <div class="login">
-            <h2>Đăng nhập</h2>
+            <h2><i class="fa-solid fa-user"></i> Đăng nhập</h2>
+            <hr>
             <input type="text" id="username" name="username" placeholder="Tên đăng nhập">
             <input type="password" id="password" name="password" placeholder="Mật khẩu">
-            <button type="submit">Đăng nhập</button>
+            <button type="submit"><i class="fa-solid fa-arrow-right-to-bracket"></i><b> Đăng nhập</b></button>
         </div>
     </form>
     
 
 </body>
-</html>
+</html> -->

@@ -1,23 +1,6 @@
-<?php
-session_start();
-if (!isset($_SESSION['id_admin'])) {
-    header("Location: /web/admin/home_admin/login.php");
-    exit();
-}
-
-$id_admin = $_SESSION['id_admin'];
-
-?> 
-
 <!DOCTYPE html>
 <html>
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/web/admin/home_admin/home_admin.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <title>Nhập khoa</title>
-</head>
+<title>Nhập khoa</title>
 <style>
     .menu ul a .khoa{
     background-color: #0F6CBF;
@@ -26,45 +9,13 @@ $id_admin = $_SESSION['id_admin'];
 </style>
 <body>
     <div class="container">
-    <header>
-            <ul>
-                <li><a href="/web/admin/home_admin/home_admin.php"><i class="fa-solid fa-house"></i> Trang chủ</a></li>
-                <li>Tài khoản <?php echo $_SESSION['id_admin']?></li>
-                <li>
-                    <?php 
-                        include('config.php');
-                        
-                        $id_admin = $_SESSION['id_admin'];
-
-                        $sql = "SELECT id_admin, ho_dem, ten FROM admin WHERE id_admin = '$id_admin'";
-                        $result = $conn->query($sql);
-
-                        if ($result->num_rows > 0) {
-                            // output data of each row
-                            while($row = $result->fetch_assoc()) {
-                                echo "Họ và tên: ". $row["ho_dem"]. " " . $row["ten"] ;
-                            }
-                        } else {
-                            echo "Không tìm được tài khoản";
-                        }
-
-                        $conn->close();
-
-                    ?>
-                </li>
-            </ul>
-        </header>
+        <?php
+            require "../home_admin/header.php";
+        ?>
         <ul class="menu_add">
-            <li class="menu">
-                <ul>
-                <a href="/web/admin/add/khoa.php"><li class = "khoa">Khoa</li></a>
-                <a href="/web/admin/add/nganh.php"><li>Ngành</li></a>
-                <a href="/web/admin/add/chuyen_nganh.php"><li>Chuyên ngành</li></a>
-                <a href="/web/admin/add/hoc_phan.php"><li>Học phần</li></a>
-                <a href="/web/admin/add/lop.php"><li>Lớp</li></a>
-                <a href="/web/admin/add/nhom_hoc_phan.php"><li>Nhóm học phần</li></a>
-                </ul>
-            </li>
+            <?php
+                require "../home_admin/menu.php";
+            ?>
             <li class="add">
                 <form action="khoa.php" method="post">
                     <input type="text" id="ma_khoa" name="ma_khoa" placeholder="Mã khoa">
@@ -77,15 +28,15 @@ $id_admin = $_SESSION['id_admin'];
         </ul>
     
     </div>
-    <footer>
-        <p>Bạn đang đăng nhập với tài khoản  <?php echo $_SESSION['id_admin']?><a href="logout.php">(Thoát)</a></p>
-    </footer>
+    <?php
+        require "../home_admin/footer.php";
+    ?>
 </body>
 </html>
 
 <?php
 
-include('config.php');
+include('../home_admin/config.php');
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST')
 {
