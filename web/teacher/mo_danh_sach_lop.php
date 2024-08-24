@@ -1,7 +1,6 @@
-
 <div class = "drop_menu">
     <select name="ma_lop" id="ma_lop">
-        <option value="ma_lop">Chọn lớp</option>
+        <option value="">Chọn lớp</option>
             <?php
                 include('../home/home/config.php');
     
@@ -13,8 +12,7 @@
                 if ($result->num_rows > 0) {
                     // output data of each row
                 while($row = $result->fetch_assoc()) {
-                    echo '<option value="'  . $row['ma_lop']. '">' . $row['ma_lop'] . '</option>';
-            
+                    echo '<option value="'  . $row['ma_lop']. '">' . $row['ma_lop'] . '</option>';    
                     }
                 }
             ?>
@@ -28,7 +26,7 @@
         <th>STT</th>
         <th>Mã sinh viên</th>
         <th>Sinh viên</th>
-        <th>Điểm</th>
+        <th>Điểm rèn luyện</th>
     </tr>
     <tr>
 
@@ -61,3 +59,4 @@
         ?>
     </tr>
 </table>
+<button class="button" type="submit" style = "margin-left: 220px"><b>Nhập điểm</b></button>

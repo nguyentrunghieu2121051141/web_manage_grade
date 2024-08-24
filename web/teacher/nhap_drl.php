@@ -14,10 +14,11 @@
                 <?php
                     require "mo_danh_sach_lop.php";
                 ?>
-        
-            <button class="button" type="submit"><b>Nhập điểm</b></button>
         </form>
     </div>
+    <?php
+        require "menu.php";
+    ?>
     <?php
         require "footer.php";
     ?>

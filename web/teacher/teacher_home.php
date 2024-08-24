@@ -10,12 +10,7 @@
         <?php
             require "header.php";
         ?>
-        <div class="menu">
-            <ul>
-                <a href="nhap_drl.php"><li>Nhập điểm rèn luyện</li></a>
-                <a href="/web/admin/add/nganh.php"><li>Nhập điểm</li></a>
-            </ul>
-        </div>
+        
     </div>
     <?php
         require "menu.php";

@@ -47,54 +47,41 @@ header li {
     color: #D7EDF9;
 }
 
-.menu {
-    height: 345px;
-    width: 260px;
-    margin-top: 30px;
-    margin-left: 30px;
-    padding: 0;
-  }
-  
-.menu ul {
-    width: 200px;
-    padding: 0;
-    margin: 0;
-    list-style: none;
+.menu{
+    position:absolute;
     font-family: Arial, Helvetica, sans-serif ;
+    height: 200px;
+    width: 260px;
+    right: 0;
+    top: 380px;
+    border: 2px solid #CED4DA;
     background-color: #FFFFFF;
-    justify-content: space-between;
-  }
-  
-.menu li {
-    
-    margin: 0;
-    padding: 10px; 
+}
+
+.menu h2{
+    margin-left: 25px;
+    color: #219DE5;
+}
+
+.menu a{
     list-style: none;
-  }
-.menu ul li{
-    padding: 12px 16px;
-    border:1px solid #DFDFDF;
-}
-
-.menu ul a li{
-    color: black;
-}
-
-.menu ul a{
     text-decoration: none;
 }
 
-.menu ul li:hover{
-    background-color: #F2F2F2;
+.menu a li{ 
+    left: 0px;
+    border-bottom:1px solid #DFDFDF;
+    padding: 12px 5px;
+    color: #2FA4E7;
 }
 
-select{
-    margin-left: 50px;
+.menu a li:hover{ 
+    color: #157AB5;
 }
 
 .drop_menu select{
     border-radius: 5px;
-    margin-left: 345px;
+    margin-left: 20px;
     height: 25px;
     width: 150px;
 }
@@ -105,7 +92,8 @@ select{
 
 .drop_menu button{
     margin-bottom: 20px;
-    width: 100px;
+    max-width: 100px;
+    margin: 0 auto;
     color: #FFFFFF;
     height: 25px;
     margin-top: 20px;
@@ -120,24 +108,26 @@ select{
 }
 
 .note{
-    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     height: 55px;
     border:1px solid #DEE2E6;
-    width: 700px;
-    margin-left: 345px;
+    max-width: 700px;
+    margin-left: 20px;
     background-color: #C5E6F8;
 }
 
 .note b{
-    text-align: center;
-    padding-top: 30px;
+    padding: 0;
     font-family: Arial, Helvetica, sans-serif ;
 }
 
 table{
-    width: 700px;
+    max-width: 700px;
+    width: 100%;
     background-color: white;
-    margin-left: 345px;
+    margin-left: 20px;
     font-family: Arial, Helvetica, sans-serif ;
 }
 
@@ -176,10 +166,10 @@ table td:hover{
 }
 
 .login{
-    position: fixed;
+    position:absolute;
     font-family: Arial, Helvetica, sans-serif ;
     height: 240px;
-    width: 270px;
+    width: 260px;
     right: 0;
     top: 80px;
     border: 2px solid #CED4DA;
@@ -200,7 +190,7 @@ table td:hover{
 
 .login button{
     margin-top: 5px;
-    border: 2px solid #CED4DA;
+    border: 2px solid #E35901;
     border-radius: 5px;
     background-color: #E45901;
     margin-left: 12px;
@@ -216,6 +206,7 @@ table td:hover{
 
 .login button:hover{
     font-size: 15px;
+    border: 2px solid #9D3D00;
 }
 
 .button {
