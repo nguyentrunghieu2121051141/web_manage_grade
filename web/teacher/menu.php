@@ -52,8 +52,8 @@ $mgv = $_SESSION['mgv'];
         <h2><i class="fa-solid fa-gears"></i> Tính năng</h2>
         <hr>
         <ul>
-            <a href="nhap_drl.php"><li>> Nhập điểm rèn luyện</li></a>
-            <a href="/web/admin/add/nganh.php"><li>> Nhập điểm</li></a>
+            <a href="trang_nhap_drl.php"><li>> Nhập điểm rèn luyện</li></a>
+            <a href="nhap_diem.php"><li>> Nhập điểm</li></a>
         </ul>
     </div>
 </body>

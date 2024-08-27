@@ -1,26 +1,15 @@
-<!DOCTYPE html>
-<html>
-<link rel="stylesheet" href="home_teacher.css">
-<body>
-    <div class="container">
-        <?php
-            require "header.php";
-        ?>
-        <br>
+<?php
+    if (!empty($_POST['drl'])) {
+        foreach ($_POST['drl'] as $msv => $drl) {
 
-        <br>
-        <form method="post" action="">
-            
-                <?php
-                    require "mo_danh_sach_lop.php";
-                ?>
-        </form>
-    </div>
-    <?php
-        require "menu.php";
-    ?>
-    <?php
-        require "footer.php";
-    ?>
-</body>
-</html>
+            echo $drl . $msv;
+            $sql_drl = "INSERT INTO diem_ren_luyen (msv, drl) VALUES ('$msv', '$drl')";
+
+            if ($conn->query($sql_drl) === TRUE) {
+                echo "Đã nhập điểm thành công cho msv: " . $msv . "<br>";
+            } else {
+                echo "Lỗi: " . $sql_drl . "<br>" . $conn->error;
+            }
+        }
+    }
+?>
