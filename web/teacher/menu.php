@@ -53,7 +53,7 @@ $mgv = $_SESSION['mgv'];
         <hr>
         <ul>
             <a href="trang_nhap_drl.php"><li>> Nhập điểm rèn luyện</li></a>
-            <a href="nhap_diem.php"><li>> Nhập điểm</li></a>
+            <a href="trang_nhap_diem.php"><li>> Nhập điểm</li></a>
         </ul>
     </div>
 </body>

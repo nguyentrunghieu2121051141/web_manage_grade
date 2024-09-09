@@ -62,6 +62,7 @@
     <?php
         require "nhap_drl.php";
     ?>
+
     <button class="button" type="submit" name="nhap_diem" style="margin-left: 220px"><b>Nhập điểm</b></button>
 
 </form>

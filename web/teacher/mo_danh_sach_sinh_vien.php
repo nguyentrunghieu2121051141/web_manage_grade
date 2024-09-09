@@ -1,5 +1,6 @@
 <form method="post" action="mo_danh_sach_sinh_vien.php">
     <div class="drop_menu">
+        
         <select name="ma_nhom" id="ma_nhom">
             <option value="">Chọn nhóm</option>
             <?php
@@ -7,17 +8,36 @@
 
                 $mgv = $_SESSION['mgv'];
 
-                $sql = "SELECT ma_nhom FROM nhom_hoc_phan WHERE mgv = '$mgv'";
+                $sql = "SELECT ma_nhom, ma_hoc_phan FROM nhom_hoc_phan WHERE mgv = '$mgv'";
                 $result = $conn->query($sql);
 
                 if ($result->num_rows > 0) {
                     while($row = $result->fetch_assoc()) {
-                        echo '<option value="' . $row['ma_nhom'] . '">' . $row['ma_nhom'] . '</option>';    
+                        echo '<option value="' . $row['ma_nhom'] . '">' . $row['ma_nhom'] . '</option>';  
                     }
                 }
             ?>
         </select>
         <button type="submit">Mở danh sách</button>
+        <?php
+            if ($_SERVER["REQUEST_METHOD"] == "POST" && !empty($_POST['ma_nhom'])) {
+                $ma_nhom = $_POST['ma_nhom'];
+
+                // Truy vấn để lấy ma_hoc_phan tương ứng với ma_nhom
+                $sql = "SELECT ma_hoc_phan FROM nhom_hoc_phan WHERE ma_nhom = '$ma_nhom'";
+                $result = $conn->query($sql);
+
+                if ($result->num_rows > 0) {
+                    $row = $result->fetch_assoc();
+                    $ma_hoc_phan = $row['ma_hoc_phan'];
+                    echo '<input type="hidden" name="ma_hoc_phan" value="' . $ma_hoc_phan . '">';
+                } else {
+                    echo "Không tìm thấy mã học phần cho nhóm này.";
+                }
+
+                $conn->close();
+            }
+        ?>
     </div>
     <div class="note"><b>Danh sách sinh viên</b></div>
     <table>
@@ -58,46 +78,15 @@
         }
         ?>
     </table>
+
+    <?php
+        require "nhap_diem.php";
+    ?>
+
     <button class="button" type="submit" name="nhap_diem" style="margin-left: 220px"><b>Nhập điểm</b></button>
 
     <?php
-if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['nhap_diem'])) {
-    include('../home/home/config.php');
-
-    if (!empty($_POST['diem_c']) ) {
-        // Xử lý điểm cho từng loại điểm
-        foreach ($_POST['diem_c'] as $msv => $drl_c) {
-            if (!empty($drl_c)) {
-                $sql2 = "INSERT INTO diem_hoc_phan (diem_c, msv) VALUES ('$drl_c', '$msv')";
-                if ($conn->query($sql2) !== TRUE) {
-                    echo "Error: " . $sql2 . "<br>" . $conn->error;
-                }
-            }
-        }
-
-        // foreach ($_POST['diem_b'] as $msv => $drl_b) {
-        //     if (!empty($drl_b)) {
-        //         $sql2 = "INSERT INTO diem_ren_luyen (drl, msv) VALUES ('$drl_b', '$msv')";
-        //         if ($conn->query($sql2) !== TRUE) {
-        //             echo "Error: " . $sql2 . "<br>" . $conn->error;
-        //         }
-        //     }
-        // }
-
-        // foreach ($_POST['diem_a'] as $msv => $drl_a) {
-        //     if (!empty($drl_a)) {
-        //         $sql2 = "INSERT INTO diem_ren_luyen (drl, msv) VALUES ('$drl_a', '$msv')";
-        //         if ($conn->query($sql2) !== TRUE) {
-        //             echo "Error: " . $sql2 . "<br>" . $conn->error;
-        //         }
-        //     }
-        // }
-    } else {
-        echo "Vui lòng nhập ít nhất một loại điểm.";
-    }
-
-    $conn->close();
-}
-?>
+        require "xu_ly_diem.php";
+    ?>
 
 </form>
