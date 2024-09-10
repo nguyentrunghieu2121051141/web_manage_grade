@@ -54,6 +54,7 @@ $mgv = $_SESSION['mgv'];
         <ul>
             <a href="trang_nhap_drl.php"><li>> Nhập điểm rèn luyện</li></a>
             <a href="trang_nhap_diem.php"><li>> Nhập điểm</li></a>
+            <a href="cap_nhat_diem.php"><li>> Cập nhật điểm</li></a>
         </ul>
     </div>
 </body>

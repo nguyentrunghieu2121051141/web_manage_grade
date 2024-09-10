@@ -41,7 +41,6 @@ if ($result->num_rows > 0) {
             $diem_tb_4 = 0;
         }
 
-        echo "<br> id: " . $row["msv"] . " - Name: " . $row["ma_hoc_phan"] . " " . $diem_a . " " . $diem_b . " " . $diem_c . " " . $diem_tb_10 . " " . $diem_tb_chu . " " . $diem_tb_4 . "<br>";
 
         $sql_diem_tb = "UPDATE diem_hoc_phan SET diem_tb_10 = '$diem_tb_10', diem_tb_4 = '$diem_tb_4', diem_tb_chu = '$diem_tb_chu' WHERE msv = '$msv' AND ma_hoc_phan = '$ma_hoc_phan'";
 
@@ -52,6 +51,5 @@ if ($result->num_rows > 0) {
     }
 } 
 
-$conn->close();
 
 ?>

@@ -1,4 +1,4 @@
-<form method="post" action="mo_danh_sach_sinh_vien.php">
+<form method="post" action="cap_nhat_diem.php">
     <div class="drop_menu">
         
         <select name="ma_nhom" id="ma_nhom">
@@ -14,6 +14,7 @@
                 if ($result->num_rows > 0) {
                     while($row = $result->fetch_assoc()) {
                         echo '<option value="' . $row['ma_nhom'] . '">' . $row['ma_nhom'] . '</option>';  
+                       
                     }
                 }
             ?>
@@ -21,7 +22,8 @@
         <button type="submit">Mở danh sách</button>
         <?php
             if ($_SERVER["REQUEST_METHOD"] == "POST" && !empty($_POST['ma_nhom'])) {
-                $ma_nhom = $_POST['ma_nhom'];
+                $_SESSION['ma_nhom'] = $_POST['ma_nhom'];
+                $ma_nhom = $_SESSION['ma_nhom'];
 
                 // Truy vấn để lấy ma_hoc_phan tương ứng với ma_nhom
                 $sql = "SELECT ma_hoc_phan FROM nhom_hoc_phan WHERE ma_nhom = '$ma_nhom'";
@@ -29,13 +31,12 @@
 
                 if ($result->num_rows > 0) {
                     $row = $result->fetch_assoc();
-                    $ma_hoc_phan = $row['ma_hoc_phan'];
-                    echo '<input type="hidden" name="ma_hoc_phan" value="' . $ma_hoc_phan . '">';
+                    $_SESSION['ma_hoc_phan'] = $row['ma_hoc_phan'];
+                    $ma_hoc_phan = $_SESSION['ma_hoc_phan'];
+                    
                 } else {
                     echo "Không tìm thấy mã học phần cho nhóm này.";
                 }
-
-                $conn->close();
             }
         ?>
     </div>
@@ -74,7 +75,6 @@
             } else {
                 echo "Không có học sinh trong nhóm";
             }
-            $conn->close();
         }
         ?>
     </table>
@@ -87,6 +87,7 @@
 
     <?php
         require "xu_ly_diem.php";
+        $conn->close(); 
     ?>
 
 </form>

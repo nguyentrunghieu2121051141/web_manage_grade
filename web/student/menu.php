@@ -47,5 +47,14 @@ $mgv = $_SESSION['msv'];
         <button><a href="/web/home/login/logout.php"><b>Đăng xuất</b></a></button>
         
     </div>
+
+    <div class="menu">
+        <h2><i class="fa-solid fa-gears"></i> Tính năng</h2>
+        <hr>
+        <ul>
+            <a href="xem_diem.php"><li>> Xem điểm</li></a>
+        </ul>
+    </div>
+
 </body>
 </html>

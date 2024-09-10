@@ -18,6 +18,7 @@
 
     <header>
         <ul>
+            <li><i class="fa-solid fa-bars"></i></li>
             <li><a href="/web/admin/home_admin/home_admin.php"><i class="fa-solid fa-house"></i> Trang chủ</a></li>
             <li>Tài khoản: <?php echo $_SESSION['id_admin']?></li>
             <li>

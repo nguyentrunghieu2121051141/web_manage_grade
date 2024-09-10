@@ -38,28 +38,5 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
 $conn->close();
 ?>
 
-<!-- <!DOCTYPE html>
-<html>
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="home.css">
-    <title>Đăng nhập</title>
-   
-</head>
 
-
-<body>
-    <form action="login.php" method="post">
-        <div class="login">
-            <h2><i class="fa-solid fa-user"></i> Đăng nhập</h2>
-            <hr>
-            <input type="text" id="username" name="username" placeholder="Tên đăng nhập">
-            <input type="password" id="password" name="password" placeholder="Mật khẩu">
-            <button type="submit"><i class="fa-solid fa-arrow-right-to-bracket"></i><b> Đăng nhập</b></button>
-        </div>
-    </form>
-    
-
-</body>
-</html> -->
+</html> 
