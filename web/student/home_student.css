@@ -231,6 +231,14 @@ table .header_row{
     background-color: #249FE5;
 }
 
+#tin_chi {
+    width: 62px;
+}
+
+#diem {
+    width: 74px;
+}
+
 table, th, td {
     border-collapse: collapse;
     border:1px solid #DEE2E6;

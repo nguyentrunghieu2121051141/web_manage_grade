@@ -20,14 +20,54 @@
                     <th>STT</th>
                     <th>Mã MH</th>
                     <th>Tên môn học</th>
-                    <th>Số tín chỉ</th>
-                    <th>Điểm thi</th>
-                    <th>Điểm TK (10)</th>
-                    <th>Điểm TK (4)</th>
-                    <th>Điểm TK (C)</th>
+                    <th id = "tin_chi">Số tín chỉ</th>
+                    <th id = "diem">Điểm thi</th>
+                    <th id = "diem">Điểm TK (10)</th>
+                    <th id = "diem">Điểm TK (4)</th>
+                    <th id = "diem">Điểm TK (C)</th>
                 </tr>
                 <?php 
                    
+                   include('../home/home/config.php');
+               
+                   $msv = $_SESSION['msv'];
+                   $sql_diem = "SELECT msv, ma_hoc_phan, diem_a, diem_tb_10, diem_tb_4, diem_tb_chu FROM diem_hoc_phan WHERE msv = '$msv'";
+                   $result_diem = $conn->query($sql_diem);
+               
+                   if ($result_diem->num_rows > 0) {
+                       //Lấy mã học phần
+                       while($row_diem = $result_diem->fetch_assoc()) {
+                            
+                            echo '<tr style="height: 30px;">';
+
+                            $_SESSION['ma_hoc_phan'] = $row_diem["ma_hoc_phan"];
+                            $ma_hoc_phan = $_SESSION["ma_hoc_phan"];
+                  
+                            $sql_hoc_phan = "SELECT ma_hoc_phan, ten_hoc_phan, so_tin_chi FROM hoc_phan WHERE ma_hoc_phan = '$ma_hoc_phan'";
+                            $result_hoc_phan = $conn->query($sql_hoc_phan);
+
+                            // Hiển thị mã học phần, tên học phần, số tín chỉ
+
+                            if ($result_hoc_phan->num_rows > 0) {
+                                $stt = 1;
+                                while($row_hoc_phan = $result_hoc_phan->fetch_assoc()) {
+                                    
+                                    echo '<td>' . $stt++ . '</td>';
+                                    echo '<td>' . $row_hoc_phan["ma_hoc_phan"] . '</td>';
+                                    echo '<td>' . $row_hoc_phan["ten_hoc_phan"] . '</td>';
+                                    echo '<td>' . $row_hoc_phan["so_tin_chi"] . '</td>';
+                            } 
+
+                            // Hiển thị bảng điểm của sinh viên
+                            echo '<td>' . $row_diem["diem_a"] . '</td>';
+                            echo '<td>' . $row_diem["diem_tb_10"] . '</td>';
+                            echo '<td>' . $row_diem["diem_tb_4"] . '</td>';
+                            echo '<td>' . $row_diem["diem_tb_chu"] . '</td>';
+                            echo '</tr>';
+                       }
+                   } 
+                }
+                            
                 ?>
             </table>
         </div>

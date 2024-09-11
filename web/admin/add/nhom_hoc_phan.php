@@ -77,6 +77,9 @@
                     </select>
                     <br>
                     <br>
+                    <input type="number" id="so_luong" name="so_luong" placeholder="Số lượng sinh viên">
+                    <br>
+                    <br>
                     <button type="submit">Nhập</button>
                 </form>
             </li>

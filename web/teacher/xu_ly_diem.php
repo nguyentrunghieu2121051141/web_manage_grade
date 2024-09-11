@@ -39,6 +39,7 @@ if ($result->num_rows > 0) {
         } else {
             $diem_tb_chu = 'F';
             $diem_tb_4 = 0;
+    
         }
 
 

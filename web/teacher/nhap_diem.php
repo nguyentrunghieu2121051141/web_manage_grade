@@ -8,21 +8,14 @@ if (!empty($_POST['diem_a']) || !empty($_POST['diem_b']) || !empty($_POST['diem_
 
     // Nhập điểm A
     foreach ($_POST['diem_a'] as $msv => $diem_a) {
-        $sql_diem_a = "SELECT diem_a FROM diem_hoc_phan WHERE msv = '$msv'";
-        $result_diem_a = $conn->query($sql_diem_a);
-        $sql_diem_a_nhom = "SELECT diem_a FROM bang_diem_nhom WHERE msv = '$msv'";
-        $result_diem_a_nhom = $conn->query($sql_diem_a_nhom);
-        if ($result_diem_a->num_rows > 0 && $result_diem_a_nhom->num_rows) {
-            echo "Đã tồn tại";
-        } else {
         
-            $sql_diem_a = "INSERT INTO diem_hoc_phan (msv, diem_a, ma_hoc_phan) VALUES ('$msv', '$diem_a', '$ma_hoc_phan')";
-            $sql_diem_a_nhom = "INSERT INTO bang_diem_nhom (msv, diem_a, mgv, ma_nhom) VALUES ('$msv', '$diem_a', '$mgv', '$ma_nhom')";
+        $sql_diem_a = "INSERT INTO diem_hoc_phan (msv, diem_a, ma_hoc_phan) VALUES ('$msv', '$diem_a', '$ma_hoc_phan')";
+        $sql_diem_a_nhom = "INSERT INTO bang_diem_nhom (msv, diem_a, mgv, ma_nhom) VALUES ('$msv', '$diem_a', '$mgv', '$ma_nhom')";
 
-            if (!$conn->query($sql_diem_a) || !$conn->query($sql_diem_a_nhom)) {
-                echo "Lỗi: " . $conn->error . "<br>";
-            }
+        if (!$conn->query($sql_diem_a) || !$conn->query($sql_diem_a_nhom)) {
+            echo "Lỗi: " . $conn->error . "<br>";
         }
+    
     }
 
     // Nhập điểm B

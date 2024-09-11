@@ -80,17 +80,26 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $ho_dem = $row['ho_dem'];
             $ten = $row['ten'];
 
-            // Thực hiện chèn dữ liệu vào bảng danh_sach_sinh_vien
-            $sql_insert = "INSERT INTO danh_sach_sinh_vien (ma_nhom, msv, ho_dem, ten) 
-                           VALUES ('$ma_nhom', '$msv', '$ho_dem', '$ten')";
+            // Kiểm tra sự tồn tại của cả msv và ma_nhom trong bảng danh_sach_sinh_vien
+            $sql_danh_sach_sinh_vien = "SELECT * FROM danh_sach_sinh_vien WHERE msv = '$msv' AND ma_nhom = '$ma_nhom'";
+            $result_danh_sach_sinh_vien  = $conn->query($sql_danh_sach_sinh_vien);
 
-            if ($conn->query($sql_insert) === TRUE) {
-                echo "Dữ liệu đã được thêm thành công!";
+            if ($result_danh_sach_sinh_vien->num_rows > 0) {
+                echo "Đã tồn tại sinh viên này trong nhóm này.";
             } else {
-                echo "Lỗi: " . $sql_insert . "<br>" . $conn->error;
-            }
+
+                // Thực hiện chèn dữ liệu vào bảng danh_sach_sinh_vien
+                $sql_insert = "INSERT INTO danh_sach_sinh_vien (ma_nhom, msv, ho_dem, ten) 
+                            VALUES ('$ma_nhom', '$msv', '$ho_dem', '$ten')";
+
+                if ($conn->query($sql_insert) === TRUE) {
+                    echo "Dữ liệu đã được thêm thành công!";
+                } else {
+                    echo "Lỗi: " . $sql_insert . "<br>" . $conn->error;
+                }
+            } 
         } else {
-            echo "Không tìm thấy thông tin sinh viên.";
+            echo "Không tìm thấy sinh viên.";
         }
     }
 }

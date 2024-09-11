@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Aug 27, 2024 at 07:31 PM
--- Server version: 10.4.28-MariaDB
--- PHP Version: 8.2.4
+-- Generation Time: Sep 11, 2024 at 06:16 PM
+-- Server version: 10.4.32-MariaDB
+-- PHP Version: 8.2.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -44,6 +44,30 @@ CREATE TABLE `admin` (
 
 INSERT INTO `admin` (`id_admin`, `mat_khau`, `ho_dem`, `ten`, `email`, `sdt`, `ngay_sinh`, `gioi_tinh`) VALUES
 (2121, 'hieu', 'Nguyễn Trung', 'Hiếu', 'giomua@gmail.com', '0987654321', '2024-08-13', 'Nam');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `bang_diem_nhom`
+--
+
+CREATE TABLE `bang_diem_nhom` (
+  `ma_nhom` int(11) NOT NULL,
+  `msv` int(10) NOT NULL,
+  `mgv` int(10) NOT NULL,
+  `diem_a` int(10) NOT NULL,
+  `diem_b` int(10) NOT NULL,
+  `diem_c` int(10) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `bang_diem_nhom`
+--
+
+INSERT INTO `bang_diem_nhom` (`ma_nhom`, `msv`, `mgv`, `diem_a`, `diem_b`, `diem_c`) VALUES
+(4, 1010, 3131, 1, 3, 2),
+(4, 1111, 3131, 4, 2, 1),
+(4, 1212, 3131, 0, 1, 3);
 
 -- --------------------------------------------------------
 
@@ -134,14 +158,7 @@ INSERT INTO `danh_sach_sinh_vien` (`ma_nhom`, `msv`, `ho_dem`, `ten`) VALUES
 (4, 1010, 'Trần Ngọc', 'Sang'),
 (4, 1111, 'Trần Khánh', 'Linh'),
 (4, 1212, 'Lê Văn', 'Thành'),
-(4, 1313, 'Trần Tiến ', 'Luật'),
-(4, 1414, 'Lê Trung', 'Quốc'),
-(4, 1515, 'Nguyễn Thị', 'Diệu'),
-(4, 1616, 'Nguyễn Bùi Ngọc', 'Ánh'),
-(4, 1717, 'Trần Lê Tuần', 'Khanh'),
-(4, 1818, 'Lê Ngọc', 'Huyền'),
-(4, 1919, 'Hoàng Lê Nhất Thống', 'Chí'),
-(4, 7171, 'Tô Đát', 'Kỷ');
+(6, 1010, 'Trần Ngọc', 'Sang');
 
 -- --------------------------------------------------------
 
@@ -159,6 +176,15 @@ CREATE TABLE `diem_hoc_phan` (
   `diem_tb_10` float DEFAULT NULL,
   `diem_tb_chu` varchar(5) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `diem_hoc_phan`
+--
+
+INSERT INTO `diem_hoc_phan` (`ma_hoc_phan`, `msv`, `diem_a`, `diem_b`, `diem_c`, `diem_tb_4`, `diem_tb_10`, `diem_tb_chu`) VALUES
+(7080508, 1010, 1, 3, 2, 0, 1.7, 'F'),
+(7080508, 1111, 4, 2, 1, 0, 3.1, 'F'),
+(7080508, 1212, 0, 1, 3, 0, 0.6, 'F');
 
 -- --------------------------------------------------------
 
@@ -425,6 +451,26 @@ INSERT INTO `sinh_vien` (`msv`, `ma_lop`, `ho_dem`, `ten`, `sdt`, `email`, `mat_
 (8181, 'DCCTCT66_05B', 'Chu Nguyên', 'Chương', 2147483647, 'nguyenchuong@gmail.com', 'nguyenchuong', '2023-10-13', 'Nam'),
 (9191, 'DCCTCT66_05B', 'Nguyễn Quý', 'Chương', 2147483647, 'quychuong@gmail.com', 'quychuong', '2024-03-31', 'Nam');
 
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `sinh_vien_truot_mon`
+--
+
+CREATE TABLE `sinh_vien_truot_mon` (
+  `ma_hoc_phan` int(7) NOT NULL,
+  `msv` int(10) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `sinh_vien_truot_mon`
+--
+
+INSERT INTO `sinh_vien_truot_mon` (`ma_hoc_phan`, `msv`) VALUES
+(7080508, 1010),
+(7080508, 1111),
+(7080508, 1212);
+
 --
 -- Indexes for dumped tables
 --
@@ -434,6 +480,14 @@ INSERT INTO `sinh_vien` (`msv`, `ma_lop`, `ho_dem`, `ten`, `sdt`, `email`, `mat_
 --
 ALTER TABLE `admin`
   ADD PRIMARY KEY (`id_admin`);
+
+--
+-- Indexes for table `bang_diem_nhom`
+--
+ALTER TABLE `bang_diem_nhom`
+  ADD PRIMARY KEY (`ma_nhom`,`msv`,`mgv`),
+  ADD KEY `msv` (`msv`),
+  ADD KEY `mgv` (`mgv`);
 
 --
 -- Indexes for table `chuyen_nganh`
@@ -521,6 +575,13 @@ ALTER TABLE `sinh_vien`
   ADD KEY `ma_lop` (`ma_lop`);
 
 --
+-- Indexes for table `sinh_vien_truot_mon`
+--
+ALTER TABLE `sinh_vien_truot_mon`
+  ADD PRIMARY KEY (`ma_hoc_phan`,`msv`),
+  ADD KEY `msv` (`msv`);
+
+--
 -- AUTO_INCREMENT for dumped tables
 --
 
@@ -533,6 +594,14 @@ ALTER TABLE `admin`
 --
 -- Constraints for dumped tables
 --
+
+--
+-- Constraints for table `bang_diem_nhom`
+--
+ALTER TABLE `bang_diem_nhom`
+  ADD CONSTRAINT `bang_diem_nhom_ibfk_1` FOREIGN KEY (`ma_nhom`) REFERENCES `nhom_hoc_phan` (`ma_nhom`) ON DELETE CASCADE,
+  ADD CONSTRAINT `bang_diem_nhom_ibfk_2` FOREIGN KEY (`msv`) REFERENCES `sinh_vien` (`msv`) ON DELETE CASCADE,
+  ADD CONSTRAINT `bang_diem_nhom_ibfk_3` FOREIGN KEY (`mgv`) REFERENCES `giang_vien` (`mgv`) ON DELETE CASCADE;
 
 --
 -- Constraints for table `chuyen_nganh`
@@ -605,6 +674,13 @@ ALTER TABLE `nhom_hoc_phan`
 --
 ALTER TABLE `sinh_vien`
   ADD CONSTRAINT `sinh_vien_ibfk_1` FOREIGN KEY (`ma_lop`) REFERENCES `lop` (`ma_lop`) ON DELETE CASCADE;
+
+--
+-- Constraints for table `sinh_vien_truot_mon`
+--
+ALTER TABLE `sinh_vien_truot_mon`
+  ADD CONSTRAINT `sinh_vien_truot_mon_ibfk_1` FOREIGN KEY (`ma_hoc_phan`) REFERENCES `hoc_phan` (`ma_hoc_phan`) ON DELETE CASCADE,
+  ADD CONSTRAINT `sinh_vien_truot_mon_ibfk_2` FOREIGN KEY (`msv`) REFERENCES `sinh_vien` (`msv`) ON DELETE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
