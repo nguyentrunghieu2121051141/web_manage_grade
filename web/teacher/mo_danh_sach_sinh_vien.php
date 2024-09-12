@@ -1,4 +1,4 @@
-<form method="post" action="mo_danh_sach_sinh_vien.php">
+<form method="post" action="cap_nhat_diem.php">
     <div class="drop_menu">
         
         <select name="ma_nhom" id="ma_nhom">
@@ -14,6 +14,7 @@
                 if ($result->num_rows > 0) {
                     while($row = $result->fetch_assoc()) {
                         echo '<option value="' . $row['ma_nhom'] . '">' . $row['ma_nhom'] . '</option>';  
+                       
                     }
                 }
             ?>
@@ -41,7 +42,7 @@
     </div>
     <div class="note"><b>Danh sách sinh viên</b></div>
     <table>
-        <tr class="header_row">
+        <tr id="header_row">
             <th>STT</th>
             <th>Mã sinh viên</th>
             <th>Sinh viên</th>
@@ -62,7 +63,7 @@
                 $_SESSION['ma_nhom'] = $ma_nhom;
                 $stt = 1;
                 while ($row = $result1->fetch_assoc()) {
-                    echo '<tr style="height: 30px;">';
+                    echo '<tr id = "row" style="height: 30px;">';
                     echo '<td>' . $stt++ . '</td>';
                     echo '<td>' . $row["msv"] . '</td>';
                     echo '<td>' . $row["ho_dem"] . ' ' . $row["ten"] . '</td>';

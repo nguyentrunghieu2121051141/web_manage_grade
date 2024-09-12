@@ -56,15 +56,27 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
     $ngaysinh = $_POST['ngay_sinh'];
     $gioitinh = $_POST['gender'];
 
-    // Chèn dữ liệu vào bảng
-    $sql = "INSERT INTO admin (id_admin, ho_dem, ten, sdt, email, mat_khau, ngay_sinh, gioi_tinh) 
-    VALUES ('$id_admin', '$ho_dem', '$ten', '$sdt', '$email', '$mat_khau', '$ngaysinh', '$gioitinh')";
+    if (empty($_POST['id_admin']) || empty($_POST['ho_dem']) || empty($_POST['ten']) || 
+    empty($_POST['sdt']) || empty($_POST['email']) || empty($_POST['mat_khau']) || 
+    empty($_POST['ngay_sinh']) || empty($_POST['gender'])) {
+        echo'Không được để trống';
+    }else{
+        $sql = "SELECT id_admin FROM admin WHERE id_admin = '$id_admin'";
+        $result = $conn->query($sql);
+        if ($result->num_rows > 0) {
+            echo "Đã tồn tại";
+        } else {
 
+            // Chèn dữ liệu vào bảng
+            $sql = "INSERT INTO admin (id_admin, ho_dem, ten, sdt, email, mat_khau, ngay_sinh, gioi_tinh) 
+            VALUES ('$id_admin', '$ho_dem', '$ten', '$sdt', '$email', '$mat_khau', '$ngaysinh', '$gioitinh')";
 
-    if ($conn->query($sql) === TRUE) {
-        echo "Thành công ";
-    } else {
-        echo "Error: " . $sql . "<br>" . $conn->error;
+            if ($conn->query($sql) === TRUE) {
+                echo "Thành công ";
+            } else {
+                echo "Error: " . $sql . "<br>" . $conn->error;
+            }
+        }
     }
 }
 

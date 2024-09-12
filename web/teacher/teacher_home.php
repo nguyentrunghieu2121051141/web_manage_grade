@@ -12,9 +12,14 @@
         ?>
         
     </div>
-    <?php
-        require "menu.php";
-    ?>
+    <main>
+        <?php
+            require "thong_tin_giang_vien.php";
+        ?>
+        <?php
+            require "menu.php";
+        ?>
+    </main>
     <?php
         require "footer.php";
     ?>

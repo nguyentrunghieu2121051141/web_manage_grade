@@ -8,16 +8,22 @@
     <title>Cổng thông tin Đào tạo đại học</title>
 </head>
 <body>
-<div class="container">
     <?php
         require "header.php";
     ?>
-</div>
-    <?php
-        require "menu.php";
-    ?>
+
+    <main>
+        <?php
+            require "thong_tin.php";
+        ?>
+        <?php
+            require "menu.php";
+        ?>
+    </main>
+
     <?php
         require "footer.php";
     ?>
+
 </body>
 </html>

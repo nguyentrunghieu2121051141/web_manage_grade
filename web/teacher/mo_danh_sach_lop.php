@@ -22,7 +22,7 @@
     </div>
     <div class="note"><b>Danh sách lớp</b></div>
     <table>
-        <tr class="header_row">
+        <tr id="header_row">
             <th>STT</th>
             <th>Mã sinh viên</th>
             <th>Sinh viên</th>
@@ -42,7 +42,7 @@
             $_SESSION['ma_lop'] = $ma_lop;
             $stt = 1;
             while ($row = $result1->fetch_assoc()) {
-                echo '<tr style="height: 30px;">';
+                echo '<tr id = "row" style="height: 30px;">';
                 echo '<td>' . $stt++ . '</td>';
                 echo '<td>' . $row["msv"] . '</td>';
                 echo '<td>' . $row["ho_dem"] . ' ' . $row["ten"] . '</td>';

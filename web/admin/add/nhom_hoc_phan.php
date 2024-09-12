@@ -22,7 +22,7 @@
                     <input type="text" id="ma_nhom" name="ma_nhom" placeholder="Mã nhóm">
                     <br>
                     <br>
-                    <select name="ma_hoc_phan" id="ma_hoc_phan">
+                    <select name="ma_hoc_phan" id="ma_hp">
                     <option value="">-- Chọn học phần --</option>
                     <?php
                         include('../home_admin/config.php');
@@ -75,6 +75,9 @@
                         }
                     ?>
                     </select>
+                    <br>
+                    <br>
+                    <input type="number" id="so_luong" name="so_luong" placeholder="Số lượng sinh viên">
                     <br>
                     <br>
                     <button type="submit">Nhập</button>
