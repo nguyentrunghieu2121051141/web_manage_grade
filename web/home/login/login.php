@@ -17,9 +17,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
             $_SESSION['msv'] = $username;
             header("Location: /web/student/home_student.php");
             exit();
-        } 
+        } else {
+            echo "Tên đăng nhập hoặc mật khẩu không đúng.";
+        }
 
-        // Kiểm tra và xử lý đăng nhập cho giảng viên nếu không tìm thấy sinh viên
+        // Kiểm tra và xử lý đăng nhập cho giảng viên
         $sql = "SELECT * FROM giang_vien WHERE mgv = '$username' AND mat_khau = '$password'";
         $result = $conn->query($sql);
 
@@ -30,6 +32,19 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
         } else {
             echo "Tên đăng nhập hoặc mật khẩu không đúng.";
         }
+
+        // Kiểm tra và xử lý đăng nhập cho admin
+        $sql = "SELECT * FROM admin WHERE id_admin = '$username' AND mat_khau = '$password'";
+        $result = $conn->query($sql);
+
+        if ($result->num_rows > 0) {
+            $_SESSION['id_admin'] = $username;
+            header("Location: /web/admin/home_admin/home_admin.php");
+            exit();
+        } else {
+            echo "Tên đăng nhập hoặc mật khẩu không đúng.";
+        }
+
     } else {
         echo "Vui lòng nhập thông tin đầy đủ.";
     }
