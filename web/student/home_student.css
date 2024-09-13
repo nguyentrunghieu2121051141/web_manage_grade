@@ -231,6 +231,20 @@ table .header_row{
     background-color: #249FE5;
 }
 
+table #row td{
+    height: 30px;
+}
+
+table #row:hover{
+    background-color: #DADADA;
+    cursor:pointer;
+}
+
+table #row td:hover{
+    background-color: #ECECEC;
+    cursor:pointer;
+} 
+
 #tin_chi {
     width: 62px;
 }

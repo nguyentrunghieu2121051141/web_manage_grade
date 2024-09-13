@@ -63,13 +63,15 @@
                 $_SESSION['ma_nhom'] = $ma_nhom;
                 $stt = 1;
                 while ($row = $result1->fetch_assoc()) {
-                    echo '<tr id = "row" style="height: 30px;">';
+                    $_SESSION['msv'] = $row["msv"];
+                    $msv = $_SESSION['msv'];
+                    echo '<tr id = "row"">';
                     echo '<td>' . $stt++ . '</td>';
-                    echo '<td>' . $row["msv"] . '</td>';
+                    echo '<td>' . $msv . '</td>';
                     echo '<td>' . $row["ho_dem"] . ' ' . $row["ten"] . '</td>';
-                    echo '<td><input id="diem_c" name="diem_c[' . $row["msv"] . ']" type="number" min="0" max="10" style="outline: none; width: 70px;"></td>';
-                    echo '<td><input id="diem_b" name="diem_b[' . $row["msv"] . ']" type="number" min="0" max="10" style="outline: none; width: 70px;"></td>';
-                    echo '<td><input id="diem_a" name="diem_a[' . $row["msv"] . ']" type="number" min="0" max="10" style="outline: none; width: 70px;"></td>';
+                    echo '<td><input id="diem_c" name="diem_c[' . $msv . ']" type="number" min="0" max="10" style="outline: none; width: 70px;"></td>';
+                    echo '<td><input id="diem_b" name="diem_b[' . $msv . ']" type="number" min="0" max="10" style="outline: none; width: 70px;"></td>';
+                    echo '<td><input id="diem_a" name="diem_a[' . $msv . ']" type="number" min="0" max="10" style="outline: none; width: 70px;"></td>';
                     echo '</tr>';
                 }
             } else {
@@ -78,9 +80,10 @@
         }
         ?>
     </table>
+    
 
     <?php
-        require "nhap_diem.php";
+        require "xu_ly_nhap_diem.php";
     ?>
 
     <button class="button" type="submit" name="nhap_diem" style="margin-left: 220px"><b>Nhập điểm</b></button>

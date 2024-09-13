@@ -9,8 +9,7 @@
         <br>
 
         <br>
-        <form method="post" action="">
-            
+        <form method="post" action="">     
                 <?php
                     require "mo_danh_sach_sinh_vien.php";
                 ?>

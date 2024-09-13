@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html>
-<title>Nhập học phần</title>
+<title>Thống kê sinh viên trượt môn</title>
 <style>
     .menu ul a .nhom_hoc_phan{
         background-color: #0F6CBF;
@@ -55,64 +55,51 @@
                             $ma_hoc_phan = $_POST['ma_hoc_phan'];
 
                            
-                            $sql_diem = "SELECT ma_hoc_phan, msv, diem_tb_10, diem_tb_4, diem_tb_chu FROM diem_hoc_phan WHERE ma_hoc_phan = '$ma_hoc_phan'";
+                            $sql_diem = "SELECT ma_hoc_phan, msv, diem_tb_10 FROM diem_hoc_phan WHERE ma_hoc_phan = '$ma_hoc_phan'";
                             $result_diem = $conn->query($sql_diem);
 
                             if ($result_diem->num_rows > 0) {
+                                while ($row = $result_diem->fetch_assoc()) {
+                                    $ma_hoc_phan = $row["ma_hoc_phan"];
+                                    $msv = $row["msv"];
+                                    $diem_tb_10 = $row["diem_tb_10"];
+
+                                    if ($diem_tb_10 < 4) {
+                                        $sql_truot = "SELECT ma_hoc_phan, msv FROM sinh_vien_truot_mon WHERE ma_hoc_phan = '$ma_hoc_phan' AND msv = '$msv'";
+                                        $result_truot = $conn->query($sql_truot);
+                                        if ($result_truot->num_rows > 0) {
+
+                                        } else{
+                                            $sql_diem_liet = "INSERT INTO sinh_vien_truot_mon (ma_hoc_phan, msv) VALUES ('$ma_hoc_phan', '$msv')";
+                                            $conn->query($sql_diem_liet);
+                                        }
+                                    }
+                                }
                                 
                                 $sql_truot = "SELECT ma_hoc_phan, msv FROM sinh_vien_truot_mon WHERE ma_hoc_phan = '$ma_hoc_phan'";
                                 $result_truot = $conn->query($sql_truot);
 
                                 if ($result_truot->num_rows > 0) {
-                                    $_SESSION['ma_hoc_phan'] = $ma_hoc_phan;
                                     $stt = 1;
                                     while ($row = $result_truot->fetch_assoc()) {
                                         echo '<tr id = "row" style="height: 30px;">';     
                                         echo '<td>' . $stt++ . '</td>';
                                         echo '<td>' . $row["ma_hoc_phan"] . '</td>';
-                                        $msv = $row["msv"];
-                                        $sql_sinh_vien = "SELECT msv, ho_dem, ten FROM sinh_vien WHERE msv = '$msv'";
+                                        $_SESSION['msv'] = $row["msv"];
+                                        $msv = $_SESSION['msv'];
+                                        echo '<td>' . $msv . '</td>';
+                                        $sql_sinh_vien = "SELECT ho_dem, ten FROM sinh_vien WHERE msv = '$msv'";
                                         $result_sinh_vien = $conn->query($sql_sinh_vien);
-
                                         if ($result_sinh_vien->num_rows > 0) {
-                                            // output data of each row
-                                            while($row = $result_sinh_vien->fetch_assoc()) {
-                                                $ho_dem = $row["ho_dem"];
-                                                $ten = $row["ten"];
+                                            while ($row = $result_sinh_vien->fetch_assoc()) {
+                                                echo '<td>' . $row["ho_dem"] . " " . $row["ten"] . '</td>';
                                             }
                                         }
                                         
-                                        echo '<td>' . $msv . '</td>';
-                                        echo '<td>' . $ho_dem . " " . $ten . '</td>';
                                         echo '</tr>';
                                     }
-
-                                } else {
-                                   
-                                    while ($row = $result_diem->fetch_assoc()) {
-                                        $msv = $row["msv"];
-                                        $diem_tb_10 = $row["diem_tb_10"];
-
-                                        if ($diem_tb_10 < 4) {
-                                            $sql_diem_liet = "INSERT INTO sinh_vien_truot_mon (ma_hoc_phan, msv) VALUES ('$ma_hoc_phan', '$msv')";
-                                            $conn->query($sql_diem_liet);
-                                        }
-                                    }
-                                  
-                                    $sql_truot = "SELECT ma_hoc_phan, msv FROM sinh_vien_truot_mon WHERE ma_hoc_phan = '$ma_hoc_phan'";
-                                    $result_truot = $conn->query($sql_truot);
-                                    if ($result_truot->num_rows > 0) {
-                                        $_SESSION['ma_hoc_phan'] = $ma_hoc_phan;
-                                        $stt = 1;
-                                        while ($row = $result_truot->fetch_assoc()) {
-                                            echo '<tr id = "row" style="height: 30px;">';     
-                                            echo '<td>' . $stt++ . '</td>';
-                                            echo '<td>' . $row["ma_hoc_phan"] . '</td>';
-                                            echo '<td>' . $row["msv"] . '</td>';
-                                            echo '</tr>';
-                                        }
-                                    }
-                                } 
+                                }
+                            
                             }
                         }
                     ?>

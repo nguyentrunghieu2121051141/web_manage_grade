@@ -38,7 +38,7 @@
                        //Lấy mã học phần
                        while($row_diem = $result_diem->fetch_assoc()) {
                             
-                            echo '<tr style="height: 30px;">';
+                            echo '<tr id = "row" style="height: 30px;">';
 
                             $_SESSION['ma_hoc_phan'] = $row_diem["ma_hoc_phan"];
                             $ma_hoc_phan = $_SESSION["ma_hoc_phan"];

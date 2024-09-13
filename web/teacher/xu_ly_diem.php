@@ -3,11 +3,11 @@
 include('../home/home/config.php');
 
 $sql_diem = "SELECT msv, ma_hoc_phan, diem_a, diem_b, diem_c FROM diem_hoc_phan";
-$result = $conn->query($sql_diem);
+$result_diem = $conn->query($sql_diem);
 
-if ($result->num_rows > 0) {
+if ($result_diem->num_rows > 0) {
     
-    while ($row = $result->fetch_assoc()) {
+    while ($row = $result_diem->fetch_assoc()) {
         $msv = $row["msv"];
         $ma_hoc_phan = $row["ma_hoc_phan"];
         $diem_a = $row["diem_a"];
@@ -41,7 +41,6 @@ if ($result->num_rows > 0) {
             $diem_tb_4 = 0;
     
         }
-
 
         $sql_diem_tb = "UPDATE diem_hoc_phan SET diem_tb_10 = '$diem_tb_10', diem_tb_4 = '$diem_tb_4', diem_tb_chu = '$diem_tb_chu' WHERE msv = '$msv' AND ma_hoc_phan = '$ma_hoc_phan'";
 
