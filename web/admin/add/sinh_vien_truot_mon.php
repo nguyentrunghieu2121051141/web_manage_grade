@@ -2,7 +2,7 @@
 <html>
 <title>Thống kê sinh viên trượt môn</title>
 <style>
-    .menu ul a .nhom_hoc_phan{
+    .menu ul a #truot{
         background-color: #0F6CBF;
         color: #FFFFFF;
     }
@@ -42,10 +42,12 @@
                     <br>
                     <br>
                     <hr>
+                    
                     <table>
                     <tr id="header_row">
                         <th>STT</th>
                         <th>Mã học phần</th>
+                        <th>Học phần</th>
                         <th>Mã sinh viên</th>
                         <th>Sinh viên</th>
                     </tr>
@@ -85,8 +87,20 @@
                                         echo '<tr id = "row" style="height: 30px;">';     
                                         echo '<td>' . $stt++ . '</td>';
                                         echo '<td>' . $row["ma_hoc_phan"] . '</td>';
-                                        $_SESSION['msv'] = $row["msv"];
-                                        $msv = $_SESSION['msv'];
+                                        $_SESSION['ma_hoc_phan'] = $row["ma_hoc_phan"];
+                                        $msv = $row["msv"];
+                                        
+                                        // Truy vấn tên học phần
+                                        $ma_hoc_phan = $_SESSION['ma_hoc_phan'];
+                                        $sql_hoc_phan = "SELECT ma_hoc_phan, ten_hoc_phan FROM hoc_phan WHERE ma_hoc_phan = '$ma_hoc_phan'";
+                                        $result_hoc_phan = $conn->query($sql_hoc_phan);
+                                        if ($result_hoc_phan->num_rows > 0){
+                                            while ($row = $result_hoc_phan->fetch_assoc()){
+                                                echo '<td>' . $row["ten_hoc_phan"] . '</td>';
+                                            }
+                                        }
+                                        // Truy vấn tên sinh viên
+                                        
                                         echo '<td>' . $msv . '</td>';
                                         $sql_sinh_vien = "SELECT ho_dem, ten FROM sinh_vien WHERE msv = '$msv'";
                                         $result_sinh_vien = $conn->query($sql_sinh_vien);
@@ -97,9 +111,13 @@
                                         }
                                         
                                         echo '</tr>';
-                                    }
-                                }
+                                    } 
+                                } 
+                                
                             
+                            }
+                            else { 
+                                echo "chua co sinh vien";
                             }
                         }
                     ?>

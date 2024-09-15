@@ -2,7 +2,7 @@
 <html>
 <title>Nhập lớp</title>
 <style>
-    .menu ul a .lop{
+    .menu ul a #lop{
     background-color: #0F6CBF;
     color: #FFFFFF;
  }

@@ -2,7 +2,7 @@
 <html>
 <title>Nhập học phần</title>
 <style>
-    .menu ul a .nhom_hoc_phan{
+    .menu ul a #nhom_hoc_phan{
         background-color: #0F6CBF;
         color: #FFFFFF;
     }

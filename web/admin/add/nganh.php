@@ -2,7 +2,7 @@
 <html><title>Nhập ngành</title>
 
 <style>
-    .menu ul a .nganh{
+    .menu ul a #nganh{
     background-color: #0F6CBF;
     color: #FFFFFF;
  }

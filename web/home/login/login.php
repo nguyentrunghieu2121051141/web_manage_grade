@@ -33,18 +33,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
             echo "Tên đăng nhập hoặc mật khẩu không đúng.";
         }
 
-        // Kiểm tra và xử lý đăng nhập cho admin
-        $sql = "SELECT * FROM admin WHERE id_admin = '$username' AND mat_khau = '$password'";
-        $result = $conn->query($sql);
-
-        if ($result->num_rows > 0) {
-            $_SESSION['id_admin'] = $username;
-            header("Location: /web/admin/home_admin/home_admin.php");
-            exit();
-        } else {
-            echo "Tên đăng nhập hoặc mật khẩu không đúng.";
-        }
-
     } else {
         echo "Vui lòng nhập thông tin đầy đủ.";
     }

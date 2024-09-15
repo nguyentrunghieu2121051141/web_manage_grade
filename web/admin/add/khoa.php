@@ -2,7 +2,7 @@
 <html>
 <title>Nhập khoa</title>
 <style>
-    .menu ul a .khoa{
+    .menu ul a #khoa{
     background-color: #0F6CBF;
     color: #FFFFFF;
  }

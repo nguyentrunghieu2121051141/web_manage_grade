@@ -43,7 +43,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     }
 }
 
-$conn->close();
+
 ?>
 
 <!DOCTYPE html>
@@ -51,7 +51,7 @@ $conn->close();
     <head>
         <meta charset="UTF-8">
         <link rel="stylesheet" href="/web/admin/sign_up/sign_up.css">
-        <title>sign_up_student</title>
+        <title>Trang đăng kí tài khoản sinh viên</title>
     </head>
         <body>
             
@@ -59,9 +59,10 @@ $conn->close();
         <form action="sign_up.php" method="post">
 
             <div class="create">
+                <h2>Đăng kí tài khoản sinh viên</h2>
                 
-                    <input type="text" id="ho_dem" name="ho_dem" placeholder="Họ đệm">
-                    <input type="text" id="ten" name="ten" placeholder="Tên">
+                    <input type="text" id="ho_dem" name="ho_dem" placeholder="Họ đệm" class="name">
+                    <input type="text" id="ten" name="ten" placeholder="Tên" class="name">
                     <input type="tel" id="sdt" name="sdt" placeholder="Số di động" size="10">
                     <input type="email" id="email" name="email" placeholder="Email">
                     <input type="password" id="mat_khau" name="mat_khau" placeholder="Mật khẩu">
@@ -76,33 +77,33 @@ $conn->close();
                     
             </div>
             <br>
+    
             <select name="ma_lop" id="ma_lop">
-                    <option value="">-- Chọn lớp --</option>
-                    <?php
-                        include('config.php');
-                        $mgv = mysqli_query($conn, "SELECT * FROM lop");
+                <option value="">Chọn lớp</option>
+                <?php
+                    include('config.php');
+                    $result = $conn->query("SELECT ma_lop FROM lop");
 
-                        $sql = "SELECT ma_lop FROM lop";
-                        $result = $conn->query($sql);
-
-                        if ($result->num_rows > 0) {
-                            // output data of each row
-                        while($row = $result->fetch_assoc()) {
-                            echo '<option value="'  . $row['ma_lop']. '">' . $row['ma_lop'] . '</option>';
-                            }
+                    if ($result->num_rows > 0) {
+                        while ($row = $result->fetch_assoc()) {
+                            echo '<option value="' . $row['ma_lop'] . '">' . $row['ma_lop'] . '</option>';
                         }
-                    ?>
-                    </select>
+                    }
+                    $conn->close()
+                ?>
+            </select>           
                     
-                <br>
+            <br>
                  
-                <div class="submit">
-                    <button type="submit">Đăng kí</button>
-                </div>
+            <div class="submit">
+                <button type="submit">Đăng kí</button>
+            </div>
                     
             </div>
         </form>
 
     </body>
-
-</head>
+    <footer>
+        <p><a href="/web/admin/home_admin/home_admin.php">Trang chủ</a></p>
+    </footer>
+</html>

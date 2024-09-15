@@ -3,23 +3,24 @@
     <head>
         <meta charset="UTF-8">
         <link rel="stylesheet" href="/web/admin/sign_up/sign_up.css">
-        <title>sign_up</title>
+        <title>Trang đăng kí tài khoản cán bộ phòng đào tạo</title>
     </head>
         <body>
-            
+
         
         <form action="sign_up.php" method="post">
 
             <div class="create">
+            <h2>Đăng kí tài khoản cán bộ phòng đào tạo</h2>
                 
-                    <input type="text" id="ho_dem" name="ho_dem" placeholder="Họ đệm">
-                    <input type="text" id="ten" name="ten" placeholder="Tên">
-                    <input type="tel" id="sdt" name="sdt" placeholder="Số di động" size="10">
-                    <input type="email" id="email" name="email" placeholder="Email">
-                    <input type="password" id="mat_khau" name="mat_khau" placeholder="Mật khẩu">
-                    <input type="date" id="ngay_sinh" name="ngay_sinh" placeholder="Ngày sinh">
-                    <input type="text" id="id_admin" name="id_admin" placeholder="Mã đăng nhập">
-    
+                <input type="text" id="ho_dem" name="ho_dem" placeholder="Họ đệm" class="name">
+                <input type="text" id="ten" name="ten" placeholder="Tên" class="name">
+                <input type="tel" id="sdt" name="sdt" placeholder="Số di động" size="10">
+                <input type="email" id="email" name="email" placeholder="Email">
+                <input type="password" id="mat_khau" name="mat_khau" placeholder="Mật khẩu">
+                <input type="date" id="ngay_sinh" name="ngay_sinh" placeholder="Ngày sinh">
+                <input type="text" id="id_admin" name="id_admin" placeholder="Mã đăng nhập">
+
                 <div class="gender">
                     <input type="radio" id="male" name="gender" value="Nam">
                     <label for="male">Nam</label>
@@ -38,6 +39,9 @@
         </form>
 
     </body>
+    <footer>
+        <p><a href="/web/admin/home_admin/home_admin.php">Trang chủ</a></p>
+    </footer>
 
 </head>
         

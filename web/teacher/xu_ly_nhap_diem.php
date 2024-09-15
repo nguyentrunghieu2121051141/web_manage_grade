@@ -27,37 +27,31 @@ if (!empty($_POST['diem_a']) || !empty($_POST['diem_b']) || !empty($_POST['diem_
             if (!$conn->query($sql_diem_a) || !$conn->query($sql_diem_a_nhom)) {
                 echo "Lỗi: " . $conn->error . "<br>";
             }
-        } else{
-            echo "Nhap diem da";
-        }
-        
+        } 
         }
 
         // Nhập điểm B
         foreach ($_POST['diem_b'] as $msv => $diem_b) {
             if ($diem_b !== '') {
-            $sql_diem_b = "UPDATE diem_hoc_phan SET diem_b = '$diem_b' WHERE msv = '$msv' AND ma_hoc_phan = '$ma_hoc_phan'";
-            $sql_diem_b_nhom = "UPDATE bang_diem_nhom SET diem_b = '$diem_b' WHERE msv = '$msv' AND ma_nhom = '$ma_nhom'";
+                $sql_diem_b = "UPDATE diem_hoc_phan SET diem_b = '$diem_b' WHERE msv = '$msv' AND ma_hoc_phan = '$ma_hoc_phan'";
+                $sql_diem_b_nhom = "UPDATE bang_diem_nhom SET diem_b = '$diem_b' WHERE msv = '$msv' AND ma_nhom = '$ma_nhom'";
 
-            if (!$conn->query($sql_diem_b) || !$conn->query($sql_diem_b_nhom)) {
-                echo "Lỗi: " . $conn->error . "<br>";
-            }
-            } else{
-                echo "Nhap diem da";
-            }
+                if (!$conn->query($sql_diem_b) || !$conn->query($sql_diem_b_nhom)) {
+                    echo "Lỗi: " . $conn->error . "<br>";
+                }
+            } 
 
         // Nhập điểm C
         foreach ($_POST['diem_c'] as $msv => $diem_c) {
             if ($diem_c !== '') {
-            $sql_diem_c = "UPDATE diem_hoc_phan SET diem_c = '$diem_c' WHERE msv = '$msv' AND ma_hoc_phan = '$ma_hoc_phan'";
-            $sql_diem_c_nhom = "UPDATE bang_diem_nhom SET diem_c = '$diem_c' WHERE msv = '$msv' AND ma_nhom = '$ma_nhom'";
+                $sql_diem_c = "UPDATE diem_hoc_phan SET diem_c = '$diem_c' WHERE msv = '$msv' AND ma_hoc_phan = '$ma_hoc_phan'";
+                $sql_diem_c_nhom = "UPDATE bang_diem_nhom SET diem_c = '$diem_c' WHERE msv = '$msv' AND ma_nhom = '$ma_nhom'";
+                
 
-            if (!$conn->query($sql_diem_c) || !$conn->query($sql_diem_c_nhom)) {
-                echo "Lỗi: " . $conn->error . "<br>";
-            }
-            } else{
-                echo "Nhap diem da";
-            }
+                if (!$conn->query($sql_diem_c) || !$conn->query($sql_diem_c_nhom)) {
+                    echo "Lỗi: " . $conn->error . "<br>";
+                }
+            } 
         }
         } 
     }

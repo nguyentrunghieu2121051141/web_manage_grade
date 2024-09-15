@@ -2,7 +2,7 @@
 <html>
 <title>Nhập học phần</title>
 <style>
-    .menu ul a .hoc_phan{
+    .menu ul a #hoc_phan{
     background-color: #0F6CBF;
     color: #FFFFFF;
  }
@@ -18,7 +18,7 @@
             ?>
             <li class="add">
                 <form action="hoc_phan.php" method="post">
-                    <input type="text" id="ma_hoc_phan" name="ma_hoc_phan" placeholder="Mã học phần">
+                    <input type="text"  name="ma_hoc_phan" placeholder="Mã học phần">
                     <input type="text" id="ten_hoc_phan" name="ten_hoc_phan" placeholder="Tên học phần">
                     <input type="number" id="so_tin_chi" name="so_tin_chi" placeholder="Số tín chỉ" min = "1">
                     <br>

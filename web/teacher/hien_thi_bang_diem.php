@@ -20,7 +20,7 @@
 
                 $mgv = $_SESSION['mgv'];
 
-                $sql = "SELECT ma_nhom FROM bang_diem_nhom WHERE mgv = '$mgv'";
+                $sql = "SELECT DISTINCT ma_nhom FROM bang_diem_nhom WHERE mgv = '$mgv'";
                 $result = $conn->query($sql);
 
                 if ($result->num_rows > 0) {

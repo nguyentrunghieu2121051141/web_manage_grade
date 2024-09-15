@@ -41,7 +41,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     }
 }
 
-$conn->close();
 ?>
 
 <!DOCTYPE html>
@@ -49,7 +48,7 @@ $conn->close();
     <head>
         <meta charset="UTF-8">
         <link rel="stylesheet" href="/web/admin/sign_up/sign_up.css">
-        <title>sign_up_teacher</title>
+        <title>Trang đăng kí tài khoản giảng viên</title>
     </head>
         <body>
             
@@ -57,9 +56,9 @@ $conn->close();
         <form action="sign_up.php" method="post">
 
             <div class="create">
-                
-                    <input type="text" id="ho_dem" name="ho_dem" placeholder="Họ đệm">
-                    <input type="text" id="ten" name="ten" placeholder="Tên">
+                <h2>Đăng kí tài khoản giảng viên</h2>
+                    <input type="text" id="ho_dem" name="ho_dem" placeholder="Họ đệm" class="name">
+                    <input type="text" id="ten" name="ten" placeholder="Tên" class="name">
                     <input type="tel" id="sdt" name="sdt" placeholder="Số di động" size="10">
                     <input type="email" id="email" name="email" placeholder="Email">
                     <input type="password" id="mat_khau" name="mat_khau" placeholder="Mật khẩu">
@@ -78,7 +77,7 @@ $conn->close();
 
             <br>
                 <select name="ma_khoa" id="ma_khoa">
-                <option value="">-- Chọn khoa --</option>
+                <option value="">Chọn khoa</option>
                 <?php
                     include('config.php');
                     $sql = "SELECT ma_khoa, ten_khoa FROM khoa";
@@ -90,6 +89,7 @@ $conn->close();
                         echo '<option value="' . $row['ma_khoa'] . '">' . $row['ten_khoa'] . '</option>';
                         }
                     }
+                    $conn->close()
                 ?>
                 </select>
                     
@@ -104,7 +104,7 @@ $conn->close();
 
     </body>
 
-</head>
-        
-    
-
+    <footer>
+        <p><a href="/web/admin/home_admin/home_admin.php">Trang chủ</a></p>
+    </footer>
+</html>
