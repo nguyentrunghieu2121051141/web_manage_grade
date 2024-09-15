@@ -21,15 +21,10 @@ header {
     align-items: center;
     box-sizing: border-box;
     padding: 0 20px;
+    box-sizing: border-box;
     font-family: Arial, Helvetica, sans-serif ;
 }
 
-header h1 {
-    padding: 50px;
-    margin-right: 30px;
-    font-size: 2em;
-    color: #F2F2F2;
-}
 
 header a {
     padding-left: 50px;
@@ -39,15 +34,16 @@ header a {
 
 header ul {
     list-style-type: none;
-    padding: 0;
+    display: flex;
+    align-items: center;
     margin: 0;
+    padding: 0;
 }
 
 header li {
-    display: inline;
+    margin-right: 20px;
     font-size: 20px;
     color: #F2F2F2;
-    margin-right: 20px;
 }
 
 header .menu-btn{
@@ -154,7 +150,6 @@ header .show {
     margin-left: 30px;
     padding: 0;
     z-index: 1000;
-    transition: 0.3 ease;
 }
   
 .menu ul {

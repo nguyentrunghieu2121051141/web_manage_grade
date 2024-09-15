@@ -19,29 +19,34 @@
                 }
             ?>
         </select>
+    
         <button type="submit">Mở danh sách</button>
-        <?php
-            if ($_SERVER["REQUEST_METHOD"] == "POST" && !empty($_POST['ma_nhom'])) {
-                $_SESSION['ma_nhom'] = $_POST['ma_nhom'];
-                $ma_nhom = $_SESSION['ma_nhom'];
+        </div>
+        <table>
+        <div class="note"><b>Danh sách sinh viên
+            <?php
+                if ($_SERVER["REQUEST_METHOD"] == "POST" && !empty($_POST['ma_nhom'])) {
+                    $_SESSION['ma_nhom'] = $_POST['ma_nhom'];
+                    $ma_nhom = $_SESSION['ma_nhom'];
 
-                // Truy vấn để lấy ma_hoc_phan tương ứng với ma_nhom
-                $sql = "SELECT ma_hoc_phan FROM nhom_hoc_phan WHERE ma_nhom = '$ma_nhom'";
-                $result = $conn->query($sql);
+                    // Truy vấn để lấy ma_hoc_phan tương ứng với ma_nhom
+                    $sql = "SELECT ma_hoc_phan FROM nhom_hoc_phan WHERE ma_nhom = '$ma_nhom'";
+                    $result = $conn->query($sql);
 
-                if ($result->num_rows > 0) {
-                    $row = $result->fetch_assoc();
-                    $_SESSION['ma_hoc_phan'] = $row['ma_hoc_phan'];
-                    $ma_hoc_phan = $_SESSION['ma_hoc_phan'];
-                    
-                } else {
-                    echo "Không tìm thấy mã học phần cho nhóm này.";
+                    if ($result->num_rows > 0) {
+                        $row = $result->fetch_assoc();
+                        $_SESSION['ma_hoc_phan'] = $row['ma_hoc_phan'];
+                        $ma_hoc_phan = $_SESSION['ma_hoc_phan'];
+                        echo " nhóm: " . $ma_nhom;
+                        
+                    } else {
+                        echo "Không tìm thấy mã học phần cho nhóm này.";
+                    }
                 }
-            }
-        ?>
-    </div>
-    <div class="note"><b>Danh sách sinh viên</b></div>
-    <table>
+            ?>
+        </b></div>
+    
+    
         <tr id="header_row">
             <th>STT</th>
             <th>Mã sinh viên</th>
