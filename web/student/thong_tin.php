@@ -38,7 +38,6 @@
         echo "Không tìm được tài khoản";
     }
 
-    
 
     $ma_chuyen_nganh = $_SESSION["ma_chuyen_nganh"];
     $sql_chuyen_nganh = "SELECT ma_nganh, ten_chuyen_nganh FROM chuyen_nganh WHERE ma_chuyen_nganh = '$ma_chuyen_nganh'";

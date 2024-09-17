@@ -5,66 +5,97 @@
     .menu ul a #khoa{
     background-color: #0F6CBF;
     color: #FFFFFF;
+    
  }
+
+ 
 </style>
 <body>
     <div class="container">
         <?php
             require "../home_admin/header.php";
         ?>
-        <ul class="menu_add">
+        <div class="menu_add">
+            <li>
             <?php
                 require "../home_admin/menu.php";
-            ?>
-            <li class="add">
-                <form action="khoa.php" method="post">
-                    <input type="text" id="ma_khoa" name="ma_khoa" placeholder="Mã khoa">
-                    <input type="text" id="ten_khoa" name="ten_khoa" placeholder="Tên khoa">
-                    <br>
-                    <button type="submit">Nhập</button>
-                </form>
-            </li>
-            
-        </ul>
+            ?> </li>
+    <form method="post" action="">
+    <table>
+        <caption class="note"><b>Danh sách khoa</b></caption>
+        <tr id="header_row">
+            <th>STT</th>
+            <th>Mã khoa</th>
+            <th>Tên khoa</th>
+            <th>Tác vụ</th>
+        </tr>
+
+        <?php
+            $sql_khoa = "SELECT ma_khoa, ten_khoa FROM khoa";
+            $result_khoa = $conn->query($sql_khoa);
+
+            if ($result_khoa->num_rows > 0) {
+                $stt = 1;
+                while($row = $result_khoa->fetch_assoc()) {
+                    $ma_khoa = $row["ma_khoa"];
+                    echo '<tr id="row">';
+                    echo '<td>' . $stt++ . '</td>';
+                    echo '<td>' . $ma_khoa . '</td>';
+                    echo '<td><p class="my">' . $row["ten_khoa"]  . '</p><input class="myDIV" id="ten_khoa" name="ten_khoa_moi[' . $ma_khoa . ']" type="text" style="width: 925px;"></td>';
+                    echo '<td id="task"><a href="/web/admin/add/create_khoa.php"><i class="fa-solid fa-plus"></i></a><i class="fa-solid fa-pen" onclick="myFunction(this)"></i><a href="delete.php?ma_khoa=' . $ma_khoa . '"><i class="fa-solid fa-trash"></i></a></td>';
+                    
+                    echo '</tr>';
+                }
+            } else {
+                echo "0 results";
+            }
+        ?>
+        <?php
+
+            if (!empty($_POST['ma_khoa_moi']) || !empty($_POST['ten_khoa_moi'])) {
+
+                // Cập nhật tên khoa
+                foreach ($_POST['ten_khoa_moi'] as $ma_khoa => $ten_khoa_moi) {
+                    if ($ten_khoa_moi !== '') {
+                        $sql_ten_khoa = "UPDATE khoa SET ten_khoa = '$ten_khoa_moi' WHERE ma_khoa = '$ma_khoa'";
+                        if (!$conn->query($sql_ten_khoa)) {
+                            echo "Lỗi cập nhật tên khoa: " . $conn->error . "<br>";
+                        }
+                    }
+                }
+            }
+        ?>
+    </table>
+    <button type="submit">Cập nhật</button>
+</form>
+
+</div>
+        <div class = "space"></div>
+        <script>
+            function myFunction(button) {
+                var row = button.parentElement.parentElement;
+        
+                var paragraphs = row.querySelectorAll(".my");
+                var inputs = row.querySelectorAll(".myDIV");
+        
+                for (var i = 0; i < paragraphs.length; i++) {
+                    if (paragraphs[i].style.display === "none") {
+                        paragraphs[i].style.display = "block";
+                        inputs[i].style.display = "none";
+                    } else {
+                        paragraphs[i].style.display = "none";
+                        inputs[i].style.display = "block";
+                    }
+                }
+                
+            }
+        </script>
     
     </div>
+    </form>  
     <?php
         require "../home_admin/footer.php";
     ?>
 </body>
 </html>
 
-<?php
-
-include('../home_admin/config.php');
-
-if ($_SERVER['REQUEST_METHOD'] == 'POST')
-{
-    $ma_khoa = $_POST['ma_khoa'];
-    $ten_khoa = $_POST['ten_khoa'];
-
-    if (empty($_POST['ma_khoa']) || empty($_POST['ten_khoa'])) {
-        echo'Không được để trống';
-    } else{
-        $sql = "SELECT ma_khoa FROM khoa WHERE ma_khoa = '$ma_khoa'";
-        $result = $conn->query($sql);
-
-        if ($result->num_rows > 0) {
-            echo "Đã tồn tại";
-        } else {
-
-            $sql = "INSERT INTO khoa (ma_khoa, ten_khoa) 
-            VALUES ('$ma_khoa', '$ten_khoa')";
-
-            if ($conn->query($sql) === TRUE) {
-            echo "Dữ liệu đã được thêm thành công!";
-            } else {
-            echo "Error: " . $sql . "<br>" . $conn->error;
-            }
-        }
-    }
-}
-
-$conn->close();
-
-?> 

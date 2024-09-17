@@ -20,7 +20,6 @@
             }
         }
     
-
     //Cập nhật điểm B
     
         foreach ($_POST['diem_b'] as $msv => $diem_b) {

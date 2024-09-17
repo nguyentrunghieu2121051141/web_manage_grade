@@ -44,17 +44,15 @@
                         echo "Không tìm được tài khoản";
                     }
 
-                    $conn->close();
-
                 ?>
             </li>
             <li>
                 <div class="dropdown">
-                    <button class="dropbtn" onclick="myOpenSign_up()"><i class="fa-solid fa-user-plus"></i> Đăng kí tài khoản <i class="fa fa-caret-down"></i></button>
+                    <button class="dropbtn" onclick="myOpenSign_up()">Quản lý tài khoản <i class="fa fa-caret-down"></i></button>
                     <div class="dropdown-content" id="myDropdown">
-                        <a href="../sign_up/sign_up_admin/sign_up.php">Admin</a>
-                        <a href="../sign_up/sign_up_teacher/sign_up.php">Giảng viên</a>
-                        <a href="../sign_up/sign_up_student/sign_up.php">Sinh viên</a>
+                        <a href="../sign_up/sign_up_admin/quan_ly_admin.php">Admin</a>
+                        <a href="/web/admin/sign_up/sign_up_teacher/quan_ly_giang_vien.php">Giảng viên</a>
+                        <a href="/web/admin/sign_up/sign_up_student/quan_ly_sinh_vien.php">Sinh viên</a>
                     </div>
                 </div>
             </li>
@@ -67,12 +65,12 @@
             }
 
             window.onclick = function(e) {
-            if (!e.target.matches('.dropbtn')) {
-            var myDropdown = document.getElementById("myDropdown");
-                if (myDropdown.classList.contains('show')) {
-                myDropdown.classList.remove('show');
+                if (!e.target.matches('.dropbtn')) {
+                var myDropdown = document.getElementById("myDropdown");
+                    if (myDropdown.classList.contains('show')) {
+                    myDropdown.classList.remove('show');
+                    }
                 }
-            }
             }
 
         </script>

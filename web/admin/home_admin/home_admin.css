@@ -6,7 +6,7 @@ html, body {
 body {
     display: flex;
     flex-direction: column;
-    background-color: #f0f0f0;
+    background-color: #F7F7F7;
 }
 
 .container {
@@ -25,6 +25,9 @@ header {
     font-family: Arial, Helvetica, sans-serif ;
 }
 
+header #menu_bar{
+    cursor: pointer;
+}
 
 header a {
     padding-left: 50px;
@@ -138,18 +141,25 @@ header .show {
     font-size: 15px;
 }
 
-.menu_add{
-    list-style: none;
-    display: flex;
+.container_menu{
+    width: 240px;
+    margin-left: 0;
+    height: 100%;
+    background-color: #F2F2F2;
+    position: absolute;
+    top: 50px;
+    transition: width 0.2s ease-in-out;
 }
 
 .menu {
-    height: 345px;
+    height: auto;
     width: 260px;
     margin-top: 30px;
-    margin-left: 30px;
+    margin-left: 20px;
     padding: 0;
     z-index: 1000;
+    display: flex;
+    transition: width ease-in-out 0.3s;
 }
   
 .menu ul {
@@ -182,6 +192,122 @@ header .show {
 
 .menu ul li:hover{
     background-color: #F2F2F2;
+}
+
+.menu_add .add{
+    list-style: none;
+    display: flex;
+    margin-left: 400px;
+}
+
+.filter{
+    margin-top: 20px;
+    margin-left: 292px;
+}
+
+.filter select{
+    width: 200px;
+    height: 40px;
+    border-radius: 5px;
+    border: 2px solid grey;
+}
+
+.filter button{
+    width: 60px;
+    height: 40px;
+    background-color: #219DE5;
+    color: #FFFFFF;
+    border-radius: 5px;
+    border: 2px solid grey;
+    cursor: pointer;
+}
+
+.note{
+    text-align: center;
+    background-color: #249FE5;
+    padding: auto;
+    padding-top: 15px;
+    padding-bottom: 15px;
+}
+
+.note b{
+    font-family: Arial, Helvetica, sans-serif ;
+    color: #FFFFFF;
+}
+
+table{
+    max-width: 1227px;
+    width: 100%;
+    margin-top: 20px;
+    background-color: white;
+    margin-left: 292px;
+    font-family: Arial, Helvetica, sans-serif ;
+}
+
+table, th, td {
+    border-collapse: collapse;
+    border:1px solid #DEE2E6;
+    text-align: center;
+}
+
+table, th{
+    border-collapse: collapse;
+    border:1px solid #DEE2E6;
+    text-align: center;
+}
+
+table th select option{
+    text-align: center;
+}
+
+table #header_row{
+    cursor: pointer;
+    height: 50px;
+    color: #FFFFFF;
+    background-color: #249FE5;
+}
+
+table #row td{
+    height: 30px;
+}
+
+table #row:hover{
+    background-color: #DADADA;
+    cursor:pointer;
+}
+
+table #row td:hover{
+    background-color: #ECECEC;
+    cursor:pointer;
+} 
+
+table #task  {
+    width: 142px;
+    letter-spacing: 15px;
+    color: #249FE6;
+} 
+
+table #task  {
+    width: 150px;
+    letter-spacing: 25px;
+} 
+
+table #task a {
+    color: #249FE6;
+} 
+
+table .my {
+    display: block;
+}
+
+table .myDIV {
+    margin-left: 12px;
+    display: none;
+    height: 30px;
+}
+
+.space{
+    height: 100px;
 }
 
 .failure{
@@ -322,6 +448,7 @@ footer {
     color: white;
     font-family: Arial, Helvetica, sans-serif ;
     bottom: 0;
+    position: fixed;
 } 
 footer p{
     padding-bottom: 5px ;
