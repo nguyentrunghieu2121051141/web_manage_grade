@@ -6,7 +6,7 @@ body{
 
 .create {
     width: 400px;
-    height: 580px;
+    height: 710px;
     background-color: white;
     border: 2px solid grey;
     text-align: center;
@@ -31,9 +31,24 @@ body{
     size: 23px;
 }
 
+.create select{
+  margin-top: 10px;
+}
+
 .create .gender input{
   width: 20px;
   height: 20px;
+}
+
+
+.filter button{
+  width: 60px;
+  height: 40px;
+  background-color: #219DE5;
+  color: #FFFFFF;
+  border-radius: 5px;
+  border: 2px solid grey;
+  cursor: pointer;
 }
 
 .create button{
@@ -51,6 +66,7 @@ body{
     background-color: #0B5190;
     cursor: pointer;
 }
+
 .create select{
     width: 300px;
     height: 40px;

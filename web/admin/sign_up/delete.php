@@ -14,7 +14,19 @@ if (isset($_GET['mgv'])) {
     } else {
         echo "Lỗi khi xóa giảng viên: " . $conn->error;
     }
-} else {
-    echo "Không nhận được mã giảng viên để xóa!";
+} 
+
+elseif (isset($_GET['msv'])) {
+    $msv = $_GET['msv'];
+
+    $sql_delete = "DELETE FROM sinh_vien WHERE msv = '$msv'";
+
+    if ($conn->query($sql_delete) === TRUE) {
+        
+        header("Location: /web/admin/sign_up/sign_up_student/quan_ly_sinh_vien.php");
+        exit();
+    } else {
+        echo "Lỗi khi xóa sinh viên: " . $conn->error;
+    }
 }
 ?>
