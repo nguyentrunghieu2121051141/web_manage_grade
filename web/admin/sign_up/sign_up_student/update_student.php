@@ -6,7 +6,8 @@ if (isset($_GET['msv'])) {
     $msv = $_GET['msv'];
     if (!empty($_POST['ho_dem']) || !empty($_POST['ten']) || 
     !empty($_POST['sdt']) ||!empty($_POST['email']) ||  
-    !empty($_POST['ngay_sinh']) || !empty($_POST['gioi_tinh']) || !empty($_POST['ma_lop'])) {
+    !empty($_POST['ngay_sinh']) || !empty($_POST['gioi_tinh']) || !empty($_POST['ma_lop'])|| 
+    !empty($_POST['ma_khoa']) || !empty($_POST['ma_nganh']) || !empty($_POST['ma_chuyen_nganh']) ) {
         $ho_dem = $_POST['ho_dem'];
         $ten = $_POST['ten'];
         $sdt = $_POST['sdt'];
@@ -14,10 +15,19 @@ if (isset($_GET['msv'])) {
         $ngay_sinh = $_POST['ngay_sinh'];
         $gioi_tinh = $_POST['gioi_tinh'];
         $ma_lop = $_POST['ma_lop'];
+        $ma_khoa = $_POST['ma_khoa'];
+        $ma_nganh = $_POST['ma_nganh'];
+        $ma_chuyen_nganh = $_POST['ma_chuyen_nganh'];
 
         $sql_update = "UPDATE sinh_vien SET ho_dem = '$ho_dem', ten = '$ten', sdt = '$sdt', email = '$email', ngay_sinh = '$ngay_sinh', gioi_tinh = '$gioi_tinh', ma_lop = '$ma_lop'  WHERE msv = '$msv'";
+        $sql_update_sinh_vien_lop = "UPDATE danh_sach_lop SET  ma_lop = '$ma_lop'  WHERE msv = '$msv'";
+        $sql_update_sinh_vien_khoa = "UPDATE danh_sach_sinh_vien_khoa SET  ma_khoa = '$ma_khoa'  WHERE msv = '$msv'";
+        $sql_update_sinh_vien_nganh = "UPDATE danh_sach_sinh_vien_nganh SET  ma_nganh = '$ma_nganh'  WHERE msv = '$msv'";
+        $sql_update_sinh_vien_chuyen_nganh = "UPDATE danh_sach_sinh_vien_chuyen_nganh SET  ma_chuyen_nganh = '$ma_chuyen_nganh'  WHERE msv = '$msv'";
 
-        if ($conn->query($sql_update) === TRUE) {
+        if ($conn->query($sql_update) === TRUE &&$conn->query($sql_update_sinh_vien_khoa) === TRUE 
+        &&  $conn->query($sql_update_sinh_vien_lop) === TRUE 
+        && $conn->query($sql_update_sinh_vien_nganh) === TRUE && $conn->query($sql_update_sinh_vien_chuyen_nganh) === TRUE) {
             
             header("Location: /web/admin/sign_up/sign_up_student/quan_ly_sinh_vien.php");
             exit();
@@ -50,6 +60,9 @@ if ($result_sinh_vien->num_rows > 0) {
     <head>
         <meta charset="UTF-8">
         <link rel="stylesheet" href="/web/admin/sign_up/sign_up.css">
+        <script src="https://code.jquery.com/jquery-3.6.4.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
+        <script src="app.js"></script>
         <title>Trang cập nhật tài khoản sinh viên</title>
     </head>
         <body>
@@ -76,22 +89,70 @@ if ($result_sinh_vien->num_rows > 0) {
 
             <br>
             
-        
             <br>
-            <select name="ma_lop" id="ma_lop">
-                <option value="<?php echo $ma_lop; ?>">Chọn lớp</option>
+            <select name="ma_khoa" id="ma_khoa" >
+                <option value="<?php echo $ma_khoa; ?>">Lọc theo khoa</option>
                 <?php
-                    include('config.php');
-                    $result = $conn->query("SELECT ma_lop FROM lop");
+                include('../home_admin/config.php');
+                $sql = "SELECT ma_khoa, ten_khoa FROM khoa";
+                $result = $conn->query($sql);
 
-                    if ($result->num_rows > 0) {
-                        while ($row = $result->fetch_assoc()) {
-                            echo '<option value="' . $row['ma_lop'] . '">' . $row['ma_lop'] . '</option>';
-                        }
+                if ($result->num_rows > 0) {
+                    while($row = $result->fetch_assoc()) {
+                        echo '<option value="' . $row['ma_khoa'] . '">' . $row['ten_khoa'] . '</option>';
                     }
-                    $conn->close()
+                }
                 ?>
-            </select>     
+            </select>      
+
+            <!-- Lọc theo ngành -->
+            <select name="ma_nganh" id="ma_nganh">
+                <option value="<?php echo $ma_nganh; ?>">Lọc theo ngành</option>
+                <?php
+
+                $sql_nganh = "SELECT ma_nganh, ten_nganh FROM nganh"; 
+                $result_nganh = $conn->query($sql_nganh);
+
+                if ($result_nganh->num_rows > 0) {
+                    while($row = $result_nganh->fetch_assoc()) {
+                        echo '<option value="' . $row['ma_nganh'] . '">' . $row['ten_nganh'] . '</option>';
+                    }
+                }
+                ?>
+            </select>
+            
+        <!-- Lọc theo chuyên ngành -->
+            <select name="ma_chuyen_nganh" id="ma_chuyen_nganh">
+                <option value="<?php echo $ma_chuyen_nganh; ?>">Lọc theo chuyên ngành</option>
+                <?php
+                
+                $sql_chuyen_nganh = "SELECT ma_chuyen_nganh, ten_chuyen_nganh FROM chuyen_nganh";
+            
+                $result_chuyen_nganh = $conn->query($sql_chuyen_nganh);
+                if ($result_chuyen_nganh->num_rows > 0) {
+                    while($row = $result_chuyen_nganh->fetch_assoc()) {
+                        echo '<option value="' . $row['ma_chuyen_nganh'] . '">' . $row['ten_chuyen_nganh'] . '</option>';
+                    }
+                }
+                ?>
+            </select>
+                
+                <!-- Lọc theo lớp -->
+            <select name="ma_lop" id="ma_lop">
+                <option value="<?php echo $ma_lop; ?>">Lọc theo lớp</option>
+                <?php
+                    
+                $sql_lop = "SELECT ma_lop FROM lop";
+
+                $result_lop = $conn->query($sql_lop);
+
+                if ($result_lop->num_rows > 0) {
+                    while($row = $result_lop->fetch_assoc()) {
+                        echo '<option value="' . $row['ma_lop'] . '">' . $row['ma_lop'] . '</option>';
+                    }
+                }
+                ?>
+            </select>
                     
                 <br>
                  
@@ -103,7 +164,7 @@ if ($result_sinh_vien->num_rows > 0) {
         </form>
 
     </body>
-
+    
     <footer>
         <p><a href="/web/admin/home_admin/home_admin.php">Trang chủ</a></p>
     </footer>

@@ -1,7 +1,7 @@
     $(document).ready(function(){
     $('#ma_khoa').change(function(){
     var ma_khoa = $('#ma_khoa').val(); 
-        
+    
     $.ajax({
         type: 'POST',
         url: 'fetch.php',

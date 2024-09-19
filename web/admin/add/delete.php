@@ -14,7 +14,20 @@ if (isset($_GET['ma_khoa'])) {
     } else {
         echo "Lỗi khi xóa khoa: " . $conn->error;
     }
-} else {
-    echo "Không nhận được mã khoa để xóa!";
 }
+
+if (isset($_GET['ma_nganh'])) {
+    $ma_nganh = $_GET['ma_nganh'];
+
+    $sql_delete = "DELETE FROM nganh WHERE ma_nganh = '$ma_nganh'";
+
+    if ($conn->query($sql_delete) === TRUE) {
+        
+        header("Location: /web/admin/add/nganh.php");
+        exit();
+    } else {
+        echo "Lỗi khi xóa nganh: " . $conn->error;
+    }
+} 
+
 ?>

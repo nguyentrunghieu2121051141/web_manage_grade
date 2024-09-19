@@ -1,85 +1,134 @@
 <!DOCTYPE html>
 <html>
-<title>Nhập chuyên ngành</title>
+    <script src="https://code.jquery.com/jquery-3.6.4.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
+    <script src="app.js"></script>
+<title>Nhập khoa</title>
 <style>
     .menu ul a #chuyen_nganh{
     background-color: #0F6CBF;
     color: #FFFFFF;
+    
  }
+
+ .add_student{
+        text-decoration: none; 
+        background-color: #219DE5; 
+        color: white; 
+        display: inline-block; 
+        width: 100px; 
+        height: 50px; 
+        border-radius: 5px;
+        border: 2px solid grey;
+        text-align: center; 
+        line-height: 50px;
+        margin-left: 300px;
+    }
+ 
 </style>
 <body>
     <div class="container">
         <?php
             require "../home_admin/header.php";
         ?>
-        <ul class="menu_add">
+        <div class="menu_add">
             <?php
                 require "../home_admin/menu.php";
-            ?>
-            <li class="add">
-                <form action="chuyen_nganh.php" method="post">
-                    <input type="text" id="ma_chuyen_nganh" name="ma_chuyen_nganh" placeholder="Mã chuyên ngành">
-                    <input type="text" id="ten_chuyen_nganh" name="ten_chuyen_nganh" placeholder="Tên chuyên ngành">
-                    <br>
-                    <select name="ma_nganh" id="ma_nganh">
-                    <option value="">-- Chọn ngành --</option>
-                    <?php
-                        include('../home_admin/config.php');
-                        $sql = "SELECT ma_nganh, ten_nganh FROM nganh";
-                        $result = $conn->query($sql);
+            ?> 
+    <form method="post" action="">   
+    
+        <div class = "filter">
 
-                        if ($result->num_rows > 0) {
-                            // output data of each row
-                        while($row = $result->fetch_assoc()) {
-                            echo '<option value="' . $row['ma_nganh'] . '">' . $row['ten_nganh'] . '</option>';
-                            }
-                        }
-                    ?>
-                    </select>
-                    <br>
-                    <br>
-                    <button type="submit">Nhập</button>
-                </form>
-            </li>
-        </ul>
+            <!-- Lọc theo khoa -->
+            <select name="ma_khoa" id="ma_khoa">
+                <option value="">Lọc theo khoa</option>
+                <?php
+                include('../home_admin/config.php');
+                $sql = "SELECT ma_khoa, ten_khoa FROM khoa";
+                $result = $conn->query($sql);
+
+                if ($result->num_rows > 0) {
+                    while($row = $result->fetch_assoc()) {
+                        echo '<option value="' . $row['ma_khoa'] . '">' . $row['ten_khoa'] . '</option>';
+                    }
+                }
+                ?>
+            </select>
+            <button type="submit">Lọc</button>
+
+            <!-- Lọc theo ngành -->
+            <select name="ma_nganh" id="ma_nganh">
+                <option value="">Lọc theo ngành</option>
+                <?php
+
+                $sql_nganh = "SELECT ma_nganh, ten_nganh FROM nganh"; 
+                $result_nganh = $conn->query($sql_nganh);
+
+                if ($result_nganh->num_rows > 0) {
+                    while($row = $result_nganh->fetch_assoc()) {
+                        echo '<option value="' . $row['ma_nganh'] . '">' . $row['ten_nganh'] . '</option>';
+                    }
+                }
+                ?>
+            </select>
+            <button type="submit">Lọc</button>
+            <a href="/web/admin/add/create_chuyen_nganh.php" class="add_student" ><i class="fa-solid fa-plus" style="color: white;"></i></a>
+
+        </div>
+    <table>
+        <caption class="note"><b>Danh sách khoa</b></caption>
+        <tr id="header_row">
+            <th>STT</th>
+            <th>Mã chuyên ngành</th>
+            <th>Tên chuyên ngành</th>
+            <th>Tác vụ</th>
+        </tr>
+
+        <?php
+            if (isset($_POST['ma_khoa']) && !empty($_POST['ma_khoa'])) {
+                $ma_khoa = $_POST['ma_khoa'];
+                $sql_chuyen_nganh = "SELECT ma_chuyen_nganh, ten_chuyen_nganh FROM chuyen_nganh WHERE ma_nganh in
+                (select ma_nganh from khoa where ma_khoa = '$ma_khoa')";
+            }
+            if (isset($_POST['ma_nganh']) && !empty($_POST['ma_nganh'])) {
+                $ma_nganh = $_POST['ma_nganh'];
+                $sql_chuyen_nganh = "SELECT ma_chuyen_nganh, ten_chuyen_nganh FROM chuyen_nganh WHERE ma_nganh = '$ma_nganh'";
+            } else {
+            // Lấy danh sách toàn bộ sinh viên
+                $sql_chuyen_nganh = "SELECT ma_chuyen_nganh, ten_chuyen_nganh FROM chuyen_nganh";
+            }
+            
+            $result_chuyen_nganh = $conn->query($sql_chuyen_nganh);
+
+            if ($result_chuyen_nganh->num_rows > 0) {
+                $stt = 1;
+                while($row = $result_chuyen_nganh->fetch_assoc()) {
+                    $ma_chuyen_nganh = $row["ma_chuyen_nganh"];
+                    echo '<tr id="row">';
+                    echo '<td>' . $stt++ . '</td>';
+                    echo '<td>' . $ma_chuyen_nganh . '</td>';
+                    echo '<td>' . $row["ten_chuyen_nganh"] . '</td>';
+                    echo '<td id="task"><i class="fa-solid fa-pen"></i><a href="delete.php?ma_chuyen_nganh=' . $ma_chuyen_nganh . '"><i class="fa-solid fa-trash"></i></a></td>';
+                    
+                    echo '</tr>';
+                }
+            } else {
+                echo "0 results";
+            }
+        ?>
+        
+    </table>
+    </form>  
+
+</div>
+        <div class = "space"></div>
+        
+    
     </div>
+    
     <?php
         require "../home_admin/footer.php";
     ?>
 </body>
 </html>
 
-<?php
-// session_start();
-include('../home_admin/config.php');
-
-if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-
-    $ma_chuyen_nganh = $_POST['ma_chuyen_nganh'];
-    $ten_chuyen_nganh = $_POST['ten_chuyen_nganh'];
-    $ma_nganh = $_POST['ma_nganh'];
-
-    if (empty($_POST['ma_chuyen_nganh']) || empty($_POST['ten_chuyen_nganh']) || empty($_POST['ma_nganh'])) {
-        echo'Không được để trống';
-    } else{
-        $sql = "SELECT ma_chuyen_nganh FROM chuyen_nganh WHERE ma_chuyen_nganh = '$ma_chuyen_nganh'";
-        $result = $conn->query($sql);
-
-        if ($result->num_rows > 0) {
-            echo "Đã tồn tại";
-        } else {
-            $sql = "INSERT INTO chuyen_nganh (ma_chuyen_nganh, ten_chuyen_nganh, ma_nganh) 
-            VALUES ('$ma_chuyen_nganh', '$ten_chuyen_nganh', '$ma_nganh')";
-
-            if ($conn->query($sql) === TRUE) {
-                echo "Dữ liệu đã được thêm thành công!";
-            } else {
-                echo "Lỗi: " . $sql . "<br>" . $conn->error;
-            }
-        } 
-    }
-}
-
-
-$conn->close();
-?>

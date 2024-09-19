@@ -70,6 +70,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         <link rel="stylesheet" href="/web/admin/sign_up/sign_up.css">
         <script src="https://code.jquery.com/jquery-3.6.4.js"></script>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
+        <script src="app.js"></script>
         
 
         <title>Trang đăng kí tài khoản sinh viên</title>
@@ -170,53 +171,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                     
             </div>
         </form>
-        <script>
-            $(document).ready(function(){
-                $('#ma_khoa').change(function(){
-                var ma_khoa = $('#ma_khoa').val(); 
-            
-                $.ajax({
-                    type: 'POST',
-                    url: 'fetch.php',
-                    data: {ma_khoa:ma_khoa},  
-                    success: function(data)  
-                    {
-                        $('#ma_nganh').html(data);
-                    }
-                    });
-                });
-
-                $('#ma_nganh').change(function(){
-                var ma_nganh = $('#ma_nganh').val(); 
-            
-                $.ajax({
-                    type: 'POST',
-                    url: 'fetch.php',
-                    data: {ma_nganh:ma_nganh},  
-                    success: function(data)  
-                    {
-                        $('#ma_chuyen_nganh').html(data);
-                    }
-                    });
-                });
-
-                $('#ma_chuyen_nganh').change(function(){
-                var ma_chuyen_nganh = $('#ma_chuyen_nganh').val(); 
-            
-                $.ajax({
-                    type: 'POST',
-                    url: 'fetch.php',
-                    data: {ma_chuyen_nganh:ma_chuyen_nganh},  
-                    success: function(data)  
-                    {
-                        $('#ma_lop').html(data);
-                    }
-                    });
-                });
-            });
-            
-        </script>
-
+        
     </body>
     <footer>
         <p><a href="/web/admin/home_admin/home_admin.php">Trang chủ</a></p>

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 13, 2024 at 05:39 PM
+-- Generation Time: Sep 19, 2024 at 11:56 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -60,16 +60,6 @@ CREATE TABLE `bang_diem_nhom` (
   `diem_c` int(10) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
---
--- Dumping data for table `bang_diem_nhom`
---
-
-INSERT INTO `bang_diem_nhom` (`ma_nhom`, `msv`, `mgv`, `diem_a`, `diem_b`, `diem_c`) VALUES
-(4, 1010, 3131, 0, 0, 10),
-(4, 1111, 3131, 0, 0, 10),
-(4, 1212, 3131, 0, 0, 10),
-(6, 1010, 3131, 1, 6, 5);
-
 -- --------------------------------------------------------
 
 --
@@ -112,31 +102,8 @@ CREATE TABLE `danh_sach_lop` (
 --
 
 INSERT INTO `danh_sach_lop` (`ma_lop`, `msv`, `ho_dem`, `ten`) VALUES
-('DCCTCT66_04B', 2222, 'Cao Minh', 'Quyền'),
-('DCCTCT66_04B', 2323, 'Đoàn Ngọc', 'Minh'),
-('DCCTCT66_04B', 2424, 'Lý Hoàng', 'Oanh'),
-('DCCTCT66_04B', 2525, 'Cao Lê', 'Dương'),
-('DCCTCT66_04B', 2626, 'Lê Minh', 'Chí'),
-('DCCTCT66_04B', 2727, 'Lương Triều', 'Vỹ'),
-('DCCTCT66_04B', 2828, 'Trương Tuyết', 'Nhi'),
-('DCCTCT66_05A', 1212, 'Lê Văn', 'Thành'),
-('DCCTCT66_05A', 1414, 'Lê Trung', 'Quốc'),
-('DCCTCT66_05A', 1515, 'Nguyễn Thị', 'Diệu'),
-('DCCTCT66_05B', 1313, 'Trần Tiến ', 'Luật'),
-('DCCTCT66_05B', 1717, 'Trần Lê Tuần', 'Khanh'),
-('DCCTCT66_05B', 8181, 'Chu Nguyên', 'Chương'),
-('DCCTCT66_05B', 9191, 'Nguyễn Quý', 'Chương'),
-('DCCTCT66_05C', 5151, 'Đoàn Ngọc', 'Khánh'),
-('DCCTCT66_06C', 1919, 'Hoàng Lê Nhất Thống', 'Chí'),
-('DCCTCT66_06D', 3131, 'Đoàn Minh', 'Dũng'),
-('DCCTCT66_07A', 2121, 'Trần Trụ', 'Vương'),
-('DCCTCT66_07A', 7171, 'Tô Đát', 'Kỷ'),
-('DCCTCT66_08C', 6161, 'Lê Đoàn Ánh', 'Ngọc'),
-('DCCTCT66_08D', 4141, 'Nguyễn Ngọc', 'Hoàn'),
-('DCCTCT66_09C', 1010, 'Trần Ngọc', 'Sang'),
-('DCCTCT66_09C', 1111, 'Trần Khánh', 'Linh'),
-('DCCTCT66_09C', 1616, 'Nguyễn Bùi Ngọc', 'Ánh'),
-('DCCTCT66_09C', 1818, 'Lê Ngọc', 'Huyền');
+('DCCTCT66_06A', 3030, 'Đoàn Minh', 'Quân'),
+('DCCTCT66_07A', 2020, 'Đoàn Minh', 'Dũng');
 
 -- --------------------------------------------------------
 
@@ -151,15 +118,62 @@ CREATE TABLE `danh_sach_sinh_vien` (
   `ten` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+-- --------------------------------------------------------
+
 --
--- Dumping data for table `danh_sach_sinh_vien`
+-- Table structure for table `danh_sach_sinh_vien_chuyen_nganh`
 --
 
-INSERT INTO `danh_sach_sinh_vien` (`ma_nhom`, `msv`, `ho_dem`, `ten`) VALUES
-(4, 1010, 'Trần Ngọc', 'Sang'),
-(4, 1111, 'Trần Khánh', 'Linh'),
-(4, 1212, 'Lê Văn', 'Thành'),
-(6, 1010, 'Trần Ngọc', 'Sang');
+CREATE TABLE `danh_sach_sinh_vien_chuyen_nganh` (
+  `ma_chuyen_nganh` varchar(10) NOT NULL,
+  `msv` int(10) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `danh_sach_sinh_vien_chuyen_nganh`
+--
+
+INSERT INTO `danh_sach_sinh_vien_chuyen_nganh` (`ma_chuyen_nganh`, `msv`) VALUES
+('CNPM', 3030),
+('KHMT', 2020);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `danh_sach_sinh_vien_khoa`
+--
+
+CREATE TABLE `danh_sach_sinh_vien_khoa` (
+  `ma_khoa` varchar(11) NOT NULL,
+  `msv` int(10) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `danh_sach_sinh_vien_khoa`
+--
+
+INSERT INTO `danh_sach_sinh_vien_khoa` (`ma_khoa`, `msv`) VALUES
+('CNTT', 2020),
+('CNTT', 3030);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `danh_sach_sinh_vien_nganh`
+--
+
+CREATE TABLE `danh_sach_sinh_vien_nganh` (
+  `ma_nganh` varchar(10) NOT NULL,
+  `msv` int(10) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `danh_sach_sinh_vien_nganh`
+--
+
+INSERT INTO `danh_sach_sinh_vien_nganh` (`ma_nganh`, `msv`) VALUES
+('CNTT', 2020),
+('CNTT', 3030);
 
 -- --------------------------------------------------------
 
@@ -178,16 +192,6 @@ CREATE TABLE `diem_hoc_phan` (
   `diem_tb_chu` varchar(5) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
---
--- Dumping data for table `diem_hoc_phan`
---
-
-INSERT INTO `diem_hoc_phan` (`ma_hoc_phan`, `msv`, `diem_a`, `diem_b`, `diem_c`, `diem_tb_4`, `diem_tb_10`, `diem_tb_chu`) VALUES
-(7080508, 1010, 0, 0, 10, 0, 1, 'F'),
-(7080508, 1111, 0, 0, 10, 0, 1, 'F'),
-(7080508, 1212, 0, 0, 10, 0, 1, 'F'),
-(7080515, 1010, 1, 6, 5, 0, 2.9, 'F');
-
 -- --------------------------------------------------------
 
 --
@@ -198,19 +202,6 @@ CREATE TABLE `diem_ren_luyen` (
   `msv` int(10) NOT NULL,
   `drl` int(10) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dumping data for table `diem_ren_luyen`
---
-
-INSERT INTO `diem_ren_luyen` (`msv`, `drl`) VALUES
-(2222, 51),
-(2323, 52),
-(2424, 54),
-(2525, 67),
-(2626, 65),
-(2727, 64),
-(2828, 78);
 
 -- --------------------------------------------------------
 
@@ -235,15 +226,10 @@ CREATE TABLE `giang_vien` (
 --
 
 INSERT INTO `giang_vien` (`mgv`, `ma_khoa`, `ho_dem`, `ten`, `sdt`, `email`, `mat_khau`, `ngay_sinh`, `gioi_tinh`) VALUES
-(1010, 'CNTT', 'Hoàng Mạnh', 'Cầm', 2147483647, 'manhcam@gmail.com', 'manhcam', '2023-11-16', 'Nam'),
 (2121, 'CNTT', 'Đoàn Minh', 'Quân', 2147483647, 'quanminhdoan@gmail.com', 'quan', '2024-08-13', 'Nam'),
-(3131, 'CT', 'Vũ Hồng', 'Quyên', 2147483647, 'quyen@gmail.com', 'quyen', '2024-08-02', 'Nữ'),
-(4141, 'CNTT', 'Nguyễn Thu', 'Thùy', 2147483647, 'thuthuy@gmail.com', 'thuthuy', '2024-08-01', 'Nữ'),
+(4141, 'CNTT', 'Trần Thị ', 'Hằng', 987654321, 'tranhang@gmail.com', 'thuthuy', '2024-09-06', 'Nữ'),
 (5151, 'CNTT', 'Nguyễn Thùy', 'Trang', 2147483647, 'thuytrang@gmail.com', 'thuytrang', '2024-08-07', 'Nữ'),
-(6161, 'CNTT', 'Nông Thùy', 'Anh', 2147483647, 'thuyanh@gmail.com', 'thuyanh', '2024-08-22', 'Nữ'),
-(7171, 'CNTT', 'Trần Minh', 'Phương', 2147483647, 'minhphuong@gmail.com', 'minhphuong', '2024-08-28', 'Nam'),
-(8181, 'CNTT', 'Cao Anh', 'Tuấn', 2147483647, 'anhtuan@gmail.com', 'anhtuan', '2024-07-10', 'Nam'),
-(9191, 'CNTT', 'Triệu Tử', 'Long', 6879503, 'trieulong@gmail.com', 'trieulong', '2024-04-18', 'Nam');
+(8181, 'CNTT', 'Cao Hoàng', 'Long', 987654321, 'hoanglong@gmail.com', 'anhtuan', '2024-09-05', 'Nam');
 
 -- --------------------------------------------------------
 
@@ -334,29 +320,11 @@ CREATE TABLE `lop` (
 
 INSERT INTO `lop` (`ma_lop`, `mgv`, `ma_chuyen_nganh`, `so_luong`) VALUES
 ('DCCTCT66_04A', 2121, 'THKT', 60),
-('DCCTCT66_04B', 3131, 'THKT', 60),
-('DCCTCT66_04C', 4141, 'THKT', 60),
-('DCCTCT66_04D', 1010, 'THKT', 60),
-('DCCTCT66_05A', 7171, 'MMT', 60),
-('DCCTCT66_05B', 6161, 'MMT', 60),
-('DCCTCT66_05C', 8181, 'MMT', 60),
-('DCCTCT66_05D', 4141, 'MMT', 60),
 ('DCCTCT66_06A', 8181, 'CNPM', 60),
 ('DCCTCT66_06B', 2121, 'CNPM', 60),
-('DCCTCT66_06C', 5151, 'CNPM', 60),
-('DCCTCT66_06D', 2121, 'CNPM', 60),
 ('DCCTCT66_07A', 5151, 'KHMT', 60),
 ('DCCTCT66_07B', 2121, 'KHMT', 60),
-('DCCTCT66_07C', 7171, 'KHMT', 60),
-('DCCTCT66_07D', 8181, 'KHMT', 60),
-('DCCTCT66_08A', 1010, 'CNTTDH', 60),
-('DCCTCT66_08B', 3131, 'CNTTDH', 60),
-('DCCTCT66_08C', 5151, 'CNTTDH', 60),
-('DCCTCT66_08D', 9191, 'CNTTDH', 60),
-('DCCTCT66_09A', 1010, 'HTTT', 60),
-('DCCTCT66_09B', 8181, 'HTTT', 60),
-('DCCTCT66_09C', 4141, 'HTTT', 60),
-('DCCTCT66_09D', 7171, 'HTTT', 60);
+('DCCTCT66_08C', 5151, 'CNTTDH', 60);
 
 -- --------------------------------------------------------
 
@@ -396,14 +364,6 @@ CREATE TABLE `nhom_hoc_phan` (
   `so_luong` int(60) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
---
--- Dumping data for table `nhom_hoc_phan`
---
-
-INSERT INTO `nhom_hoc_phan` (`ma_nhom`, `mgv`, `ma_lop`, `ma_hoc_phan`, `so_luong`) VALUES
-(4, 3131, 'DCCTCT66_07B', 7080508, 60),
-(6, 3131, 'DCCTCT66_07B', 7080515, 60);
-
 -- --------------------------------------------------------
 
 --
@@ -427,31 +387,8 @@ CREATE TABLE `sinh_vien` (
 --
 
 INSERT INTO `sinh_vien` (`msv`, `ma_lop`, `ho_dem`, `ten`, `sdt`, `email`, `mat_khau`, `ngay_sinh`, `gioi_tinh`) VALUES
-(1010, 'DCCTCT66_09C', 'Trần Ngọc', 'Sang', 2147483647, 'ngocsang@gmail.com', 'ngocsang', '2023-11-10', 'Nam'),
-(1111, 'DCCTCT66_09C', 'Trần Khánh', 'Linh', 2147483647, 'khanhlinh@gmail.com', 'khanhlinh', '2024-02-15', 'Nữ'),
-(1212, 'DCCTCT66_05A', 'Lê Văn', 'Thành', 2147483647, 'vanthanh@gmail.com', 'vanthanh', '2024-04-06', 'Nam'),
-(1313, 'DCCTCT66_05B', 'Trần Tiến ', 'Luật', 2147483647, 'tienluat@gmail.com', 'tienluat', '2024-01-22', 'Nam'),
-(1414, 'DCCTCT66_05A', 'Lê Trung', 'Quốc', 2147483647, 'trungquoc@gmail.com', 'trungquoc', '2023-12-22', 'Nam'),
-(1515, 'DCCTCT66_05A', 'Nguyễn Thị', 'Diệu', 2147483647, 'thidieu@gmail.com', 'thidieu', '2024-05-03', 'Nữ'),
-(1616, 'DCCTCT66_09C', 'Nguyễn Bùi Ngọc', 'Ánh', 890790896, 'ngocanh@gmail.com', 'ngocanh', '2024-05-31', 'Nữ'),
-(1717, 'DCCTCT66_05B', 'Trần Lê Tuần', 'Khanh', 2147483647, 'tuankhanh@gmail.com', 'tuankhanh', '2024-07-02', 'Nam'),
-(1818, 'DCCTCT66_09C', 'Lê Ngọc', 'Huyền', 2147483647, 'nguyenhuyen@gmail.com', 'nguyenhuyen', '2024-05-30', 'Nữ'),
-(1919, 'DCCTCT66_06C', 'Hoàng Lê Nhất Thống', 'Chí', 2147483647, 'thongchi@gmail.com', 'thongchi', '2024-07-04', 'Nam'),
-(2121, 'DCCTCT66_07A', 'Trần Trụ', 'Vương', 2147483647, 'truvuong@gmail.com', 'truvuong', '2023-05-09', 'Nam'),
-(2222, 'DCCTCT66_04B', 'Cao Minh', 'Quyền', 2147483647, 'minhquyen@gmail.com', '2222', '2024-07-13', 'Nam'),
-(2323, 'DCCTCT66_04B', 'Đoàn Ngọc', 'Minh', 890743105, 'ngocminh@gmail.com', 'ngocminh', '2024-07-18', 'Nam'),
-(2424, 'DCCTCT66_04B', 'Lý Hoàng', 'Oanh', 970412039, 'hoangoanh@gmail.com', 'hoangoanh', '2024-07-03', 'Nữ'),
-(2525, 'DCCTCT66_04B', 'Cao Lê', 'Dương', 978904576, 'leduong@gmail.com', 'leduong', '2024-07-14', 'Nam'),
-(2626, 'DCCTCT66_04B', 'Lê Minh', 'Chí', 2147483647, 'minhchi@gmail.com', 'minhchi', '2024-07-30', 'Nam'),
-(2727, 'DCCTCT66_04B', 'Lương Triều', 'Vỹ', 2147483647, 'luongvy@gmail.com', 'luongvy', '2024-05-10', 'Nam'),
-(2828, 'DCCTCT66_04B', 'Trương Tuyết', 'Nhi', 1239876503, 'tuyetnhi@gmail.com', 'tuyetnhi', '2024-07-06', 'Nữ'),
-(3131, 'DCCTCT66_06D', 'Đoàn Minh', 'Dũng', 2147483647, 'minhdung@gmail.com', 'minhdung', '2024-08-14', 'Nam'),
-(4141, 'DCCTCT66_08D', 'Nguyễn Ngọc', 'Hoàn', 2147483647, 'ngochoan@gmail.com', 'ngochoan', '2023-07-15', 'Nam'),
-(5151, 'DCCTCT66_05C', 'Đoàn Ngọc', 'Khánh', 2147483647, 'ngockhanh@gmail.com', 'ngockhanh', '2023-12-15', 'Nữ'),
-(6161, 'DCCTCT66_08C', 'Lê Đoàn Ánh', 'Ngọc', 2147483647, 'anhngoc@gmail.com', 'ahngoc', '2024-02-10', 'Nữ'),
-(7171, 'DCCTCT66_07A', 'Tô Đát', 'Kỷ', 2147483647, 'datky@gmail.com', 'datky', '2023-09-02', 'Nữ'),
-(8181, 'DCCTCT66_05B', 'Chu Nguyên', 'Chương', 2147483647, 'nguyenchuong@gmail.com', 'nguyenchuong', '2023-10-13', 'Nam'),
-(9191, 'DCCTCT66_05B', 'Nguyễn Quý', 'Chương', 2147483647, 'quychuong@gmail.com', 'quychuong', '2024-03-31', 'Nam');
+(2020, 'DCCTCT66_07A', 'Đoàn Minh', 'Dũng', 98123456, 'minhdung@gmail.com', 'minhdung', '2024-09-06', 'Nam'),
+(3030, 'DCCTCT66_06A', 'Đoàn Minh', 'Quân', 2147483647, 'minhquan@gmail.com', 'minhquan', '2024-09-06', 'Nam');
 
 -- --------------------------------------------------------
 
@@ -463,16 +400,6 @@ CREATE TABLE `sinh_vien_truot_mon` (
   `ma_hoc_phan` int(7) NOT NULL,
   `msv` int(10) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dumping data for table `sinh_vien_truot_mon`
---
-
-INSERT INTO `sinh_vien_truot_mon` (`ma_hoc_phan`, `msv`) VALUES
-(7080508, 1010),
-(7080508, 1111),
-(7080508, 1212),
-(7080515, 1010);
 
 --
 -- Indexes for dumped tables
@@ -511,6 +438,27 @@ ALTER TABLE `danh_sach_lop`
 --
 ALTER TABLE `danh_sach_sinh_vien`
   ADD PRIMARY KEY (`ma_nhom`,`msv`),
+  ADD KEY `msv` (`msv`);
+
+--
+-- Indexes for table `danh_sach_sinh_vien_chuyen_nganh`
+--
+ALTER TABLE `danh_sach_sinh_vien_chuyen_nganh`
+  ADD PRIMARY KEY (`ma_chuyen_nganh`,`msv`),
+  ADD KEY `msv` (`msv`);
+
+--
+-- Indexes for table `danh_sach_sinh_vien_khoa`
+--
+ALTER TABLE `danh_sach_sinh_vien_khoa`
+  ADD PRIMARY KEY (`ma_khoa`,`msv`),
+  ADD KEY `msv` (`msv`);
+
+--
+-- Indexes for table `danh_sach_sinh_vien_nganh`
+--
+ALTER TABLE `danh_sach_sinh_vien_nganh`
+  ADD PRIMARY KEY (`ma_nganh`,`msv`),
   ADD KEY `msv` (`msv`);
 
 --
@@ -625,6 +573,27 @@ ALTER TABLE `danh_sach_lop`
 ALTER TABLE `danh_sach_sinh_vien`
   ADD CONSTRAINT `danh_sach_sinh_vien_ibfk_1` FOREIGN KEY (`ma_nhom`) REFERENCES `nhom_hoc_phan` (`ma_nhom`) ON DELETE CASCADE,
   ADD CONSTRAINT `danh_sach_sinh_vien_ibfk_2` FOREIGN KEY (`msv`) REFERENCES `sinh_vien` (`msv`) ON DELETE CASCADE;
+
+--
+-- Constraints for table `danh_sach_sinh_vien_chuyen_nganh`
+--
+ALTER TABLE `danh_sach_sinh_vien_chuyen_nganh`
+  ADD CONSTRAINT `danh_sach_sinh_vien_chuyen_nganh_ibfk_1` FOREIGN KEY (`ma_chuyen_nganh`) REFERENCES `chuyen_nganh` (`ma_chuyen_nganh`) ON DELETE CASCADE,
+  ADD CONSTRAINT `danh_sach_sinh_vien_chuyen_nganh_ibfk_2` FOREIGN KEY (`msv`) REFERENCES `sinh_vien` (`msv`) ON DELETE CASCADE;
+
+--
+-- Constraints for table `danh_sach_sinh_vien_khoa`
+--
+ALTER TABLE `danh_sach_sinh_vien_khoa`
+  ADD CONSTRAINT `danh_sach_sinh_vien_khoa_ibfk_1` FOREIGN KEY (`ma_khoa`) REFERENCES `khoa` (`ma_khoa`) ON DELETE CASCADE,
+  ADD CONSTRAINT `danh_sach_sinh_vien_khoa_ibfk_2` FOREIGN KEY (`msv`) REFERENCES `sinh_vien` (`msv`) ON DELETE CASCADE;
+
+--
+-- Constraints for table `danh_sach_sinh_vien_nganh`
+--
+ALTER TABLE `danh_sach_sinh_vien_nganh`
+  ADD CONSTRAINT `danh_sach_sinh_vien_nganh_ibfk_1` FOREIGN KEY (`ma_nganh`) REFERENCES `nganh` (`ma_nganh`) ON DELETE CASCADE,
+  ADD CONSTRAINT `danh_sach_sinh_vien_nganh_ibfk_2` FOREIGN KEY (`msv`) REFERENCES `sinh_vien` (`msv`) ON DELETE CASCADE;
 
 --
 -- Constraints for table `diem_hoc_phan`

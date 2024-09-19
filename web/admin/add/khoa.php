@@ -20,7 +20,7 @@
             <?php
                 require "../home_admin/menu.php";
             ?> </li>
-    <form method="post" action="">
+<form method="post" action="">
     <table>
         <caption class="note"><b>Danh sách khoa</b></caption>
         <tr id="header_row">

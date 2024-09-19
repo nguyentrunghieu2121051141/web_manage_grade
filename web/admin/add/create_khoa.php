@@ -57,8 +57,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
             VALUES ('$ma_khoa', '$ten_khoa')";
 
             if ($conn->query($sql) === TRUE) {
-            echo "Dữ liệu đã được thêm thành công!";
-            header("Location: /web/admin/add/khoa.php");
+                echo "Dữ liệu đã được thêm thành công!";
+                header("Location: /web/admin/add/khoa.php");
             } else {
             echo "Error: " . $sql . "<br>" . $conn->error;
             }
