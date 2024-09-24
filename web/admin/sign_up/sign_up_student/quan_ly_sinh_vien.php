@@ -4,18 +4,18 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
 <script src="app.js"></script>
 <style>
-    .add_student{
-        text-decoration: none; 
-        background-color: #219DE5; 
-        color: white; 
-        display: inline-block; 
-        width: 100px; 
-        height: 50px; 
-        border-radius: 5px;
-        border: 2px solid grey;
-        text-align: center; 
-        line-height: 50px;
-    }
+.add_student{
+    text-decoration: none; 
+    background-color: #219DE5; 
+    color: white; 
+    display: inline-block; 
+    width: 100px; 
+    height: 50px; 
+    border-radius: 5px;
+    border: 2px solid grey;
+    text-align: center; 
+    line-height: 50px;
+}
 </style>
 <body>
     <div class="container">

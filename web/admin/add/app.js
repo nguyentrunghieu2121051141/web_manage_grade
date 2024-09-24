@@ -1,4 +1,4 @@
-    $(document).ready(function(){
+$(document).ready(function(){
     $('#ma_khoa').change(function(){
     var ma_khoa = $('#ma_khoa').val(); 
     
@@ -40,5 +40,6 @@
         }
         });
     });
+
 });
 

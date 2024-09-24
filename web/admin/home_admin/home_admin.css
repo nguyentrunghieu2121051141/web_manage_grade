@@ -205,6 +205,7 @@ header .show {
 .filter{
     margin-top: 40px;
     margin-left: 292px;
+    display: inline-block; 
 }
 
 .filter select{
@@ -323,10 +324,10 @@ table .myDIV {
     width: 1000px;
     height: 605px;
     margin-right: 100px;
-    padding-top: 50px;
+    margin-left: 292px;
+    padding-top: 100px;
     background-color: #FFFFFF;
     border: 1px solid #E3E3E3;
-    margin-right: 0px;
 }
 
 .failure_add h2{

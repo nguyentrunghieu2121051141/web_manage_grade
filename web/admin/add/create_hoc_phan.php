@@ -1,28 +1,29 @@
 <?php
-// session_start();
+
 include('../home_admin/config.php');
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
-    $ma_chuyen_nganh = $_POST['ma_chuyen_nganh'];
-    $ten_chuyen_nganh = $_POST['ten_chuyen_nganh'];
+    $ma_hoc_phan = $_POST['ma_hoc_phan'];
+    $ten_hoc_phan = $_POST['ten_hoc_phan'];
+    $so_tin_chi = $_POST['so_tin_chi'];
     $ma_nganh = $_POST['ma_nganh'];
 
-    if (empty($_POST['ma_chuyen_nganh']) || empty($_POST['ten_chuyen_nganh']) || empty($_POST['ma_nganh'])) {
+    if (empty($_POST['ma_hoc_phan']) || empty($_POST['ten_hoc_phan']) || empty($_POST['so_tin_chi']) || empty($_POST['ma_nganh'])) {
         echo'Không được để trống';
     } else{
-        $sql = "SELECT ma_chuyen_nganh FROM chuyen_nganh WHERE ma_chuyen_nganh = '$ma_chuyen_nganh'";
+        $sql = "SELECT ma_hoc_phan FROM hoc_phan WHERE ma_hoc_phan = '$ma_hoc_phan'";
         $result = $conn->query($sql);
 
         if ($result->num_rows > 0) {
             echo "Đã tồn tại";
         } else {
-            $sql = "INSERT INTO chuyen_nganh (ma_chuyen_nganh, ten_chuyen_nganh, ma_nganh) 
-            VALUES ('$ma_chuyen_nganh', '$ten_chuyen_nganh', '$ma_nganh')";
+            $sql = "INSERT INTO hoc_phan (ma_hoc_phan, ten_hoc_phan, so_tin_chi, ma_nganh) 
+            VALUES ('$ma_hoc_phan', '$ten_hoc_phan', '$so_tin_chi', '$ma_nganh')";
 
             if ($conn->query($sql) === TRUE) {
                 echo "Dữ liệu đã được thêm thành công!";
-                header("Location: /web/admin/add/chuyen_nganh.php");
+                header("Location: /web/admin/add/hoc_phan.php");
             } else {
                 echo "Lỗi: " . $sql . "<br>" . $conn->error;
             }
@@ -38,9 +39,9 @@ $conn->close();
     <script src="https://code.jquery.com/jquery-3.6.4.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
     <script src="app.js"></script>
-<title>Nhập chuyên ngành</title>
+<title>Nhập học phần</title>
 <style>
-    .menu ul a #chuyen_nganh{
+    .menu ul a #hoc_phan{
     background-color: #0F6CBF;
     color: #FFFFFF;
  }
@@ -50,14 +51,15 @@ $conn->close();
         <?php
             require "../home_admin/header.php";
         ?>
-        <ul class="menu_add">
+        <div class="menu_add">
             <?php
                 require "../home_admin/menu.php";
             ?>
-            <li class="add">
-                <form action="create_chuyen_nganh.php" method="post">
-                    <input type="text" id="ma_chuyen_nganh" name="ma_chuyen_nganh" placeholder="Mã chuyên ngành">
-                    <input type="text" id="ten_chuyen_nganh" name="ten_chuyen_nganh" placeholder="Tên chuyên ngành">
+            <div class="add">
+                <form action="create_hoc_phan.php" method="post">
+                    <input type="text"  name="ma_hoc_phan" placeholder="Mã học phần">
+                    <input type="text" id="ten_hoc_phan" name="ten_hoc_phan" placeholder="Tên học phần">
+                    <input type="number" id="so_tin_chi" name="so_tin_chi" placeholder="Số tín chỉ" min = "1">
                     <br>
                     <select name="ma_khoa" id="ma_khoa">
                         <option value="">Lọc theo khoa</option>
@@ -94,13 +96,12 @@ $conn->close();
                     <br>
                     <button type="submit">Nhập</button>
                 </form>
-            </li>
-        </ul>
+            </div>
+        </div>
     </div>
     <?php
         require "../home_admin/footer.php";
     ?>
 </body>
 </html>
-
 

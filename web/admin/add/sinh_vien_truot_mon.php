@@ -13,11 +13,11 @@
             require "../home_admin/header.php";
         ?>
         
-        <ul class="failure">
+        <div class="failure">
             <?php
                 require "../home_admin/menu.php";
             ?>
-            <li class="failure_add">
+            <div class="failure_add">
                 <h2><i class="fa-solid fa-gears"></i>Thống kê sinh viên trượt môn</h2>
                 <hr>
                 <form action="sinh_vien_truot_mon.php" method="post">
@@ -124,9 +124,10 @@
 
                     </table>
                 </form>
-            </li>
-        </ul>
+            </div>
+        </div>
     </div>
+    <div class = "space"></div>
     <?php
         require "../home_admin/footer.php";
     ?>

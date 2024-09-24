@@ -52,6 +52,35 @@ if ($result_sinh_vien->num_rows > 0) {
         $gioi_tinh = $row["gioi_tinh"];
     }
 }
+
+$sql_sinh_vien_khoa = "SELECT msv, ma_khoa FROM danh_sach_sinh_vien_khoa WHERE msv = '$msv'";
+$result_sinh_vien_khoa = $conn->query($sql_sinh_vien_khoa);
+if ($result_sinh_vien_khoa->num_rows > 0) {
+    while($row = $result_sinh_vien_khoa->fetch_assoc()) {
+        $msv = $row["msv"];
+        $ma_khoa = $row["ma_khoa"];
+    }
+}
+
+$sql_sinh_vien_nganh = "SELECT msv, ma_nganh FROM danh_sach_sinh_vien_nganh WHERE msv = '$msv'";
+$result_sinh_vien_nganh = $conn->query($sql_sinh_vien_nganh);
+if ($result_sinh_vien_nganh->num_rows > 0) {
+    while($row = $result_sinh_vien_nganh->fetch_assoc()) {
+        $msv = $row["msv"];
+        $ma_nganh = $row["ma_nganh"];
+    }
+}
+
+$sql_sinh_vien_chuyen_nganh = "SELECT msv, ma_chuyen_nganh FROM danh_sach_sinh_vien_chuyen_nganh WHERE msv = '$msv'";
+$result_sinh_vien_chuyen_nganh = $conn->query($sql_sinh_vien_chuyen_nganh);
+if ($result_sinh_vien_chuyen_nganh->num_rows > 0) {
+    while($row = $result_sinh_vien_chuyen_nganh->fetch_assoc()) {
+        $msv = $row["msv"];
+        $ma_chuyen_nganh = $row["ma_chuyen_nganh"];
+    }
+}
+
+
     
 ?>
 

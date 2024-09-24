@@ -1,38 +1,38 @@
 <?php
 
-    include('../home_admin/config.php');
+include('../home_admin/config.php');
 
-    if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
-        $ma_nganh = $_POST['ma_nganh'];
-        $ten_nganh = $_POST['ten_nganh'];
-        $ma_khoa = $_POST['ma_khoa'];
+    $ma_nganh = $_POST['ma_nganh'];
+    $ten_nganh = $_POST['ten_nganh'];
+    $ma_khoa = $_POST['ma_khoa'];
 
-        if (empty($_POST['ma_nganh']) || empty($_POST['ten_nganh']) || empty($_POST['ma_khoa'])) {
-            echo'Không được để trống';
-        } else{
-            $sql = "SELECT ma_nganh FROM nganh WHERE ma_nganh = '$ma_nganh'";
-            $result = $conn->query($sql);
+    if (empty($_POST['ma_nganh']) || empty($_POST['ten_nganh']) || empty($_POST['ma_khoa'])) {
+        echo'Không được để trống';
+    } else{
+        $sql = "SELECT ma_nganh FROM nganh WHERE ma_nganh = '$ma_nganh'";
+        $result = $conn->query($sql);
 
-            if ($result->num_rows > 0) {
-                echo "Đã tồn tại";
+        if ($result->num_rows > 0) {
+            echo "Đã tồn tại";
+        } else {
+            $sql = "INSERT INTO nganh (ma_nganh, ten_nganh, ma_khoa) 
+            VALUES ('$ma_nganh', '$ten_nganh', '$ma_khoa')";
+
+            if ($conn->query($sql) === TRUE) {
+                echo "OK";
+                header("Location: /web/admin/add/nganh.php");
+                exit();
             } else {
-                $sql = "INSERT INTO nganh (ma_nganh, ten_nganh, ma_khoa) 
-                VALUES ('$ma_nganh', '$ten_nganh', '$ma_khoa')";
-
-                if ($conn->query($sql) === TRUE) {
-                    echo "OK";
-                    header("Location: /web/admin/add/nganh.php");
-                    exit();
-                } else {
-                    echo "Lỗi: " . $sql . "<br>" . $conn->error;
-                }
-            } 
-        }
+                echo "Lỗi: " . $sql . "<br>" . $conn->error;
+            }
+        } 
     }
+}
 
 
-    $conn->close();
+$conn->close();
 ?>
 <!DOCTYPE html>
 <html><title>Nhập ngành</title>

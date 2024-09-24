@@ -2,25 +2,25 @@ a<!DOCTYPE html>
 <html>
 <title>Nhập khoa</title>
 <style>
-    .menu ul a #nganh{
+.menu ul a #nganh{
     background-color: #0F6CBF;
     color: #FFFFFF;
-    
- }
 
- .add_student{
-        text-decoration: none; 
-        background-color: #219DE5; 
-        color: white; 
-        display: inline-block; 
-        width: 100px; 
-        height: 50px; 
-        border-radius: 5px;
-        border: 2px solid grey;
-        text-align: center; 
-        line-height: 50px;
-        margin-left: 300px;
-    }
+}
+
+.add_student{
+    text-decoration: none; 
+    background-color: #219DE5; 
+    color: white; 
+    display: inline-block; 
+    width: 100px; 
+    height: 50px; 
+    border-radius: 5px;
+    border: 2px solid grey;
+    text-align: center; 
+    line-height: 50px;
+    margin-left: 300px;
+}
  
 </style>
 <body>
@@ -55,11 +55,12 @@ a<!DOCTYPE html>
 
         </div>
     <table>
-        <caption class="note"><b>Danh sách khoa</b></caption>
+        <caption class="note"><b>Danh sách ngành</b></caption>
         <tr id="header_row">
             <th>STT</th>
             <th>Mã ngành</th>
             <th>Tên ngành</th>
+            <th>Trực thuộc khoa</th>
             <th>Tác vụ</th>
         </tr>
 
@@ -78,10 +79,20 @@ a<!DOCTYPE html>
                 $stt = 1;
                 while($row = $result_nganh->fetch_assoc()) {
                     $ma_nganh = $row["ma_nganh"];
+                    $ma_khoa = $row["ma_khoa"];
                     echo '<tr id="row">';
                     echo '<td>' . $stt++ . '</td>';
                     echo '<td>' . $ma_nganh . '</td>';
                     echo '<td>' . $row["ten_nganh"] . '</td>';
+                    $sql_khoa = "SELECT  ten_khoa FROM khoa where ma_khoa = '$ma_khoa'";
+                    $result_khoa = $conn->query($sql_khoa);
+                        
+                    if ($result_khoa->num_rows > 0) {
+                        // output data of each row
+                    while($row = $result_khoa->fetch_assoc()) {
+                            echo '<td>' . $row["ten_khoa"] . '</td>';
+                        }
+                    }
                     echo '<td id="task"><a href="update_nganh.php?ma_nganh=' . $ma_nganh . '""><i class="fa-solid fa-pen"></i></a><a href="delete.php?ma_nganh=' . $ma_nganh . '"><i class="fa-solid fa-trash"></i></a></td>';
                     
                     echo '</tr>';

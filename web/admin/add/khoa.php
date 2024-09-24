@@ -2,12 +2,23 @@
 <html>
 <title>Nhập khoa</title>
 <style>
-    .menu ul a #khoa{
+.menu ul a #khoa{
     background-color: #0F6CBF;
     color: #FFFFFF;
-    
- }
 
+}
+
+.update{
+    margin-left: 900px;
+    margin-top: 20px;
+    border-radius: 5px;
+    border: 1px solid grey;
+    background-color: #4CB0EA;  
+    color: #FFFFFF;
+    height: 30px;
+    width: 100px;
+    cursor: pointer;
+}
  
 </style>
 <body>
@@ -66,7 +77,7 @@
             }
         ?>
     </table>
-    <button type="submit">Cập nhật</button>
+    <button type="submit" class = "update">Cập nhật</button>
 </form>
 
 </div>

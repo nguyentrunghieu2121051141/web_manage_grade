@@ -18,7 +18,7 @@ if (!empty($_POST['ma_khoa'])) {
 elseif (!empty($_POST['ma_nganh'])) {
     $ma_nganh = $_POST['ma_nganh'];
 
-    // Lấy các ngành dựa trên mã khoa
+    // Lấy các chuyên ngành dựa trên mã ngành
     $sql_chuyen_nganh = "SELECT * FROM chuyen_nganh WHERE ma_nganh = '$ma_nganh'";  
     $result_chuyen_nganh = mysqli_query($conn, $sql_chuyen_nganh);
 
@@ -45,4 +45,5 @@ elseif (!empty($_POST['ma_chuyen_nganh'])) {
 
     echo $out;
 }
+
 ?>
