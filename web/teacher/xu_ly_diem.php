@@ -1,5 +1,4 @@
 <?php 
-
 include('../home/home/config.php');
 
 $sql_diem = "SELECT msv, ma_hoc_phan, diem_a, diem_b, diem_c FROM diem_hoc_phan";
@@ -50,6 +49,5 @@ if ($result_diem->num_rows > 0) {
 
     }
 } 
-
 
 ?>

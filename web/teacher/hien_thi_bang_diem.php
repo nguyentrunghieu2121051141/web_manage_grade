@@ -87,8 +87,7 @@
                             $row = $result_sinh_vien->fetch_assoc();
                             $ho_dem = $row['ho_dem'];
                             $ten = $row['ten'];
-                
-                            
+    
                         }
                         echo '<tr id = "row">';
                         echo '<td>' . $stt++ . '</td>';
@@ -98,9 +97,7 @@
                         echo '<td><p class="my">' . $diem_b . '</p><input class="myDIV" id="diem_b" name="diem_b[' . $msv . ']"  type="number" min="0" max="10" ></td>';
                         echo '<td><p class="my">' . $diem_a . '</p><input class="myDIV" id="diem_a" name="diem_a[' . $msv . ']"  type="number" min="0" max="10" ></td>';
                         echo '<td><i class="fa-solid fa-pen" onclick="myFunction(this) " style = "color: #2CA2E6; cursor: pointer;"></i></td>';
-                        
-
-                        
+       
                     }
                 } else {
                     echo "Nhóm chưa nhập điểm";
@@ -110,15 +107,17 @@
         ?>
         
     </table>
+    
+    <button class="button" type="submit" style="margin-left: 220px"><b>Cập nhật</b></button>
     <?php
         require "xu_ly_cap_nhat_diem.php";
     ?>
-    <button class="button" type="submit" style="margin-left: 220px"><b>Cập nhật</b></button>
-
     <?php
         require "xu_ly_diem.php";
     ?>
-
+    <?php
+        require "xu_ly_sinh_vien_truot_mon.php";
+    ?>
     <script>
         function myFunction(button) {
             var row = button.parentElement.parentElement;

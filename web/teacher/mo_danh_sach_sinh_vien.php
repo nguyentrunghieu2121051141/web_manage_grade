@@ -95,7 +95,10 @@
 
     <?php
         require "xu_ly_diem.php";
-        $conn->close(); 
     ?>
+    <?php
+        require "xu_ly_sinh_vien_truot_mon.php";
+    ?>
+
 
 </form>
